@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vote for Progress — Vieux‑Saint‑Hubert–La Savane</title>
+  <meta name="description" content="Election campaign website for Vieux‑Saint‑Hubert–La Savane. Get involved, read the platform, and find voting information." />
+  <style>
+    :root{
+      --bg: #0a0b10;
+      --card: #10131a;
+      --muted: #8ea0b6;
+      --text: #eaf2ff;
+      --brand: #6ea8ff; /* primary */
+      --brand-2: #a78bfa; /* accent */
+      --ring: #3b82f6;
+      --ok: #22c55e; --warn:#f59e0b; --error:#ef4444;
+      --radius: 18px;
+    }
+    html,body{height:100%}
+    body{margin:0;background:linear-gradient(180deg,#0b1020, #0a0b10 30%, #0a0b10);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;}
+    a{color:var(--brand)} a:hover{opacity:.9}
+    .shell{max-width:1120px;margin-inline:auto;padding:32px}
+    header{position:sticky;top:0;backdrop-filter:blur(10px);background:rgba(10,11,16,.6);border-bottom:1px solid rgba(255,255,255,.06);z-index:50}
+    .nav{display:flex;align-items:center;gap:16px;justify-content:space-between}
+    .nav a{padding:10px 14px;border-radius:10px;text-decoration:none;color:var(--text);opacity:.9}
+    .nav a:hover{background:rgba(255,255,255,.06);opacity:1}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:700}
+    .logo{width:36px;height:36px;border-radius:12px;background:
+      radial-gradient(60% 60% at 30% 30%, #8b5cf6 0,#3b82f6 40%, transparent 41%),
+      conic-gradient(from 200deg, #60a5fa, #8b5cf6, #60a5fa);
+      box-shadow:0 0 0 1px rgba(255,255,255,.08), 0 10px 30px rgba(104,129,255,.25);
+    }
+
+    /* Hero */
+    .hero{padding:72px 0 48px;background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(104,129,255,.2), transparent 40%),
+      radial-gradient(1200px 600px at 90% -10%, rgba(167,139,250,.18), transparent 45%);
+    }
+    .hero h1{font-size:clamp(28px,5vw,48px);line-height:1.1;margin:0 0 14px}
+    .hero p{font-size:clamp(16px,2.2vw,20px);color:var(--muted);margin:0 0 22px}
+    .cta{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{appearance:none;border:0;border-radius:14px;padding:12px 18px;font-weight:700;cursor:pointer}
+    .btn.primary{background:linear-gradient(135deg,var(--brand), var(--brand-2));color:#0b1020;box-shadow:0 10px 30px rgba(104,129,255,.35)}
+    .btn.ghost{background:rgba(255,255,255,.06);color:var(--text);border:1px solid rgba(255,255,255,.1)}
+
+    /* Cards */
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+    .card{grid-column:span 12;background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:20px}
+    @media(min-width:820px){.card{grid-column:span 6}}
+    .card h3{margin:0 0 8px;font-size:20px}
+    .badge{display:inline-block;background:rgba(104,129,255,.18);border:1px solid rgba(104,129,255,.35);padding:2px 10px;border-radius:999px;font-size:12px;color:#dbe8ff}
+    .list{margin:10px 0 0;padding-left:18px}
+
+    /* Section titles */
+    section{padding:38px 0}
+    .title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px}
+    .title h2{margin:0;font-size:26px}
+
+    /* Info blocks */
+    .info{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+    .blk{grid-column:span 12;background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:20px}
+    @media(min-width:820px){.blk{grid-column:span 6}}
+
+    /* Forms */
+    form{display:grid;gap:12px}
+    input,select,textarea{background:#0e1118;color:var(--text);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 14px}
+    label{font-weight:600}
+    .row{display:grid;gap:12px}
+    @media(min-width:720px){.row{grid-template-columns:1fr 1fr}}
+
+    .foot{margin-top:36px;font-size:13px;color:var(--muted)}
+    .footer{margin-top:48px;padding:22px;border-top:1px solid rgba(255,255,255,.08);color:var(--muted)}
+    .pill{display:inline-block;margin-right:8px;margin-bottom:8px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell nav">
+      <div class="brand"><div class="logo" aria-hidden="true"></div> <span>Vieux‑Saint‑Hubert–La Savane</span></div>
+      <nav>
+        <a href="#vision">Vision</a>
+        <a href="#vote">Voting Info</a>
+        <a href="#involved">Get Involved</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="shell">
+        <h1>Vote for Progress!<br/>Vote for Vieux‑Saint‑Hubert–La Savane!</h1>
+        <p>Building a healthier, greener, and more connected community — together.</p>
+        <div class="cta">
+          <a class="btn primary" href="#involved">Volunteer Today</a>
+          <a class="btn ghost" href="#vote">How to Vote</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="vision" class="shell">
+      <div class="title"><h2>Community Development Plan</h2><span class="badge">Our Priorities</span></div>
+      <div class="grid">
+        <article class="card">
+          <h3>🌳 Elderly Engagement</h3>
+          <ul class="list">
+            <li>Launch a Seniors’ Social Club for social events, wellness activities, and community connection.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>💙 Health &amp; Wellness</h3>
+          <ul class="list">
+            <li>Partner with medical schools for free health camps, offering accessible check‑ups for all.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>🏊 Recreational Facilities</h3>
+          <ul class="list"><li>Push for water parks and expanded free public swimming pools.</li></ul>
+        </article>
+        <article class="card">
+          <h3>🚀 Sustainable Mobility</h3>
+          <ul class="list"><li>Install e‑scooter charging stations at schools and workplaces.</li></ul>
+        </article>
+        <article class="card">
+          <h3>🤝 Community Support</h3>
+          <ul class="list"><li>Stay accessible and approachable, addressing your concerns with dedication and care.</li></ul>
+        </article>
+        <article class="card">
+          <h3>🌼 Environmental Development</h3>
+          <ul class="list"><li>Beautify parks and streets with greenery and public art.</li></ul>
+        </article>
+        <article class="card">
+          <h3>💼 Economic Growth</h3>
+          <ul class="list"><li>Boost small businesses, local markets, and entrepreneurship to create jobs.</li></ul>
+        </article>
+      </div>
+
+      <div class="title" style="margin-top:22px"><h2>Key Issues We’re Tackling</h2><span class="badge">At a glance</span></div>
+      <div>
+        <span class="pill">Public safety</span>
+        <span class="pill">Clean streets & parks</span>
+        <span class="pill">Better transit links</span>
+        <span class="pill">Support for seniors</span>
+        <span class="pill">Affordable recreation</span>
+        <span class="pill">Local business vitality</span>
+      </div>
+    </section>
+
+    <section id="vote" class="shell">
+      <div class="title"><h2>🗳️ Voting Information</h2><span class="badge">Make your voice heard</span></div>
+      <div class="info">
+        <div class="blk">
+          <h3>Advance Voting</h3>
+          <p><strong>Saturday, October 26</strong>: 12:00 PM – 8:00 PM</p>
+        </div>
+        <div class="blk">
+          <h3>Returning Officer’s Office</h3>
+          <p><strong>Friday, October 24</strong>: 4:00 PM – 8:00 PM</p>
+          <p><strong>Saturday, October 25 – Wednesday, October 29</strong>: Check local schedule at <em>[Insert Municipal Website]</em> for exact times.</p>
+        </div>
+        <div class="blk">
+          <h3>Mobile Voting</h3>
+          <p>Available for electors on the Electors List. Submit the Mobile Polling Registration Form at care centers, residences, or health facilities.</p>
+        </div>
+        <div class="blk">
+          <h3>Voting by Mail</h3>
+          <p>Offered to non‑domiciled electors (e.g., owners/co‑owners of buildings; occupants/co‑occupants of business establishments). Contact the municipality for application details.</p>
+        </div>
+      </div>
+      <p class="foot">Need help? Our team can guide you through any voting option. Reach out at <strong>[Insert Contact Info]</strong>.</p>
+    </section>
+
+    <section id="involved" class="shell">
+      <div class="title"><h2>📞 Get Involved</h2><span class="badge">Volunteer • Donate • Spread the word</span></div>
+      <form name="volunteer" onsubmit="event.preventDefault(); alert('Thanks! We\'ll be in touch soon.'); this.reset();">
+        <div class="row">
+          <div>
+            <label for="name">Full Name</label>
+            <input id="name" name="name" placeholder="Your name" required />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" placeholder="you@example.com" required />
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" placeholder="(xxx) xxx‑xxxx" />
+          </div>
+          <div>
+            <label for="role">How would you like to help?</label>
+            <select id="role" name="role">
+              <option>Door‑to‑door canvassing</option>
+              <option>Phone banking</option>
+              <option>Events & logistics</option>
+              <option>Social media & outreach</option>
+              <option>Data & tech support</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label for="msg">Message (optional)</label>
+          <textarea id="msg" name="message" rows="4" placeholder="Tell us a bit about your availability or skills…"></textarea>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <button class="btn primary" type="submit">Sign Up to Volunteer</button>
+          <a class="btn ghost" href="#" aria-label="Donate (link to your donation page)">Donate</a>
+        </div>
+        <p class="foot">Prefer email? Contact us at <strong>[Info@akilla]</strong> or visit <strong>[www.akillaelectrol]</strong>.</p>
+      </form>
+    </section>
+
+    <section id="contact" class="shell">
+      <div class="title"><h2>Contact</h2><span class="badge">We’re here for you</span></div>
+      <div class="info">
+        <div class="blk">
+          <h3>General Inquiries</h3>
+          <p>Email: <a href="#">[Insert Email]</a><br/>Phone: <a href="#">[Insert Phone]</a></p>
+        </div>
+        <div class="blk">
+          <h3>Media & Press</h3>
+          <p>Email: <a href="#">[Insert Media Email]</a></p>
+        </div>
+      </div>
+      <p class="foot">Authorized by <strong>[Agent’s Name]</strong>. Paid for by <strong>[Campaign Name]</strong>. © <span id="y"></span></p>
+    </section>
+  </main>
+
+  <footer class="footer shell">
+    <div>© <span id="y2"></span> Vieux‑Saint‑Hubert–La Savane Campaign • <a href="#">Privacy</a></div>
+  </footer>
+
+  <script>
+    const y = new Date().getFullYear();
+    document.getElementById('y').textContent = y;
+    document.getElementById('y2').textContent = y;
+    // Smooth scroll for in‑page anchors
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{const id=a.getAttribute('href');const el=document.querySelector(id);if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'});}})
+    })
+  </script>
+</body>
+</html>
