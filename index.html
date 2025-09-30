@@ -7,14 +7,9 @@
   <meta name="description" content="Election campaign website for Vieux-Saint-Hubert–La Savane. Get involved, read the platform, and find voting information." />
   <link rel="icon" href="favicon.ico" />
   <style>
-    :root{
-      --bg:#0a0b10; --card:#10131a; --muted:#8ea0b6; --text:#eaf2ff;
-      --brand:#6ea8ff; --brand-2:#a78bfa; --ring:#3b82f6; --radius:18px;
-    }
+    :root{ --bg:#0a0b10; --card:#10131a; --muted:#8ea0b6; --text:#eaf2ff; --brand:#6ea8ff; --brand-2:#a78bfa; --ring:#3b82f6; --radius:18px; }
     html,body{height:100%}
-    /* smooth anchor scrolling + offset for sticky header */
     html{scroll-behavior:smooth; scroll-padding-top:90px}
-
     body{margin:0;background:linear-gradient(180deg,#0b1020,#0a0b10 30%,#0a0b10);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
     a{color:var(--brand)} a:hover{opacity:.9}
     .shell{max-width:1120px;margin-inline:auto;padding:32px}
@@ -40,7 +35,7 @@
     .lang-dd select:focus{outline:none;box-shadow:0 0 0 2px var(--ring)}
     .lang-dd::after{content:"▾";position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;opacity:.7}
 
-    /* sections */
+    /* sections / cards */
     .hero{padding:72px 0 48px;background:
       radial-gradient(1200px 600px at 10% -10%, rgba(104,129,255,.2), transparent 40%),
       radial-gradient(1200px 600px at 90% -10%, rgba(167,139,250,.18), transparent 45%)}
@@ -50,7 +45,6 @@
     .btn{appearance:none;border:0;border-radius:14px;padding:12px 18px;font-weight:700;cursor:pointer}
     .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#0b1020;box-shadow:0 10px 30px rgba(104,129,255,.35)}
     .btn.ghost{background:rgba(255,255,255,.06);color:var(--text);border:1px solid rgba(255,255,255,.1)}
-
     .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
     .card{grid-column:span 12;background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:20px}
     @media(min-width:820px){.card{grid-column:span 6}}
@@ -60,22 +54,17 @@
     section{padding:38px 0}
     .title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px}
     .title h2{margin:0;font-size:26px}
-
     .info{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
     .blk{grid-column:span 12;background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:20px}
     @media(min-width:820px){.blk{grid-column:span 6}}
-
     form{display:grid;gap:12px}
     input,select,textarea{background:#0e1118;color:var(--text);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 14px}
     label{font-weight:600}
     .row{display:grid;gap:12px}
     @media(min-width:720px){.row{grid-template-columns:1fr 1fr}}
-
     .foot{margin-top:36px;font-size:13px;color:var(--muted)}
     .footer{margin-top:48px;padding:22px;border-top:1px solid rgba(255,255,255,.08);color:var(--muted)}
     .pill{display:inline-block;margin-right:8px;margin-bottom:8px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
-
-    /* bilingual visibility */
     [data-lang="en"] .lang-fr{display:none}
     [data-lang="fr"] .lang-en{display:none}
   </style>
@@ -87,12 +76,12 @@
       <nav>
         <a href="#vision">Vision</a>
         <a href="#vote">Voting Info</a>
+        <a href="#getvoterinfo">Voter Info</a>
         <a href="#events">Events</a>
         <a href="#news">News</a>
         <a href="#involved">Get Involved</a>
         <a href="#contact">Contact</a>
       </nav>
-      <!-- language dropdown -->
       <label class="lang-dd" for="lang-dd" aria-label="Language">
         <select id="lang-dd" aria-label="Language select">
           <option value="en">EN</option>
@@ -153,7 +142,7 @@
       </div>
     </section>
 
-    <!-- VOTING INFO -->
+    <!-- VOTING INFO (static cards) -->
     <section id="vote" class="shell">
       <div class="lang-en">
         <div class="title"><h2>🗳️ Voting Information</h2><span class="badge">Make your voice heard</span></div>
@@ -175,6 +164,78 @@
         </div>
         <p class="foot">Besoin d’aide? Notre équipe vous accompagne pour toute démarche : <strong>[Coordonnées]</strong>.</p>
       </div>
+    </section>
+
+    <!-- GET VOTER INFORMATION (new actionable form) -->
+    <section id="getvoterinfo" class="shell">
+      <div class="title">
+        <h2 class="lang-en">🗳️ Get Voter Information</h2>
+        <h2 class="lang-fr">🗳️ Obtenir les infos de vote</h2>
+        <span class="badge">We’ll follow up</span>
+      </div>
+
+      <form id="voterinfo" method="POST"
+            action="https://script.google.com/macros/s/AKfycbzAuD7lDzSMKjwtVctrvlIFFmWtbtN_KsA12w_x3AOuLfTs2dadvyipB3cTxc1USzo1/exec"
+            novalidate>
+        <input type="hidden" name="lang" value="en" id="langHiddenVI" />
+        <div class="row">
+          <div>
+            <label for="vi_name" class="lang-en">Full Name</label>
+            <label for="vi_name" class="lang-fr">Nom complet</label>
+            <input id="vi_name" name="name" placeholder="Jane Doe" required />
+          </div>
+          <div>
+            <label for="vi_email" class="lang-en">Email</label>
+            <label for="vi_email" class="lang-fr">Courriel</label>
+            <input id="vi_email" type="email" name="email" placeholder="you@example.com" required />
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="vi_phone" class="lang-en">Phone (optional)</label>
+            <label for="vi_phone" class="lang-fr">Téléphone (facultatif)</label>
+            <input id="vi_phone" name="phone" placeholder="(xxx) xxx-xxxx" />
+          </div>
+          <div>
+            <label for="vi_method" class="lang-en">How would you like to vote?</label>
+            <label for="vi_method" class="lang-fr">Comment voulez-vous voter ?</label>
+            <select id="vi_method" name="vote_method" required>
+              <option value="advance" class="lang-en">Advance Voting</option>
+              <option value="mobile"  class="lang-en">Mobile voting</option>
+              <option value="office"  class="lang-en">Returning Officer’s Office</option>
+              <option value="mail"    class="lang-en">Voting by Mail</option>
+              <option value="advance" class="lang-fr">Vote par anticipation</option>
+              <option value="mobile"  class="lang-fr">Vote itinérant</option>
+              <option value="office"  class="lang-fr">Bureau du président d’élection</option>
+              <option value="mail"    class="lang-fr">Vote par correspondance</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label><input type="checkbox" name="opt_email" />
+            <span class="lang-en">Email me these instructions.</span>
+            <span class="lang-fr">Envoyez-moi les instructions par courriel.</span>
+          </label>
+          <label><input type="checkbox" name="opt_sms" />
+            <span class="lang-en">Text me these instructions.</span>
+            <span class="lang-fr">Envoyez-moi les instructions par SMS.</span>
+          </label>
+          <small class="foot">
+            <span class="lang-en">You can unsubscribe anytime. SMS: reply STOP. Email: reply UNSUBSCRIBE.</span>
+            <span class="lang-fr">Vous pouvez vous désabonner en tout temps. SMS : répondez STOP. Courriel : répondez UNSUBSCRIBE.</span>
+          </small>
+        </div>
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <button class="btn primary" type="submit">
+            <span class="lang-en">Send me voting info</span>
+            <span class="lang-fr">Envoyez-moi les infos</span>
+          </button>
+        </div>
+        <p class="foot" id="viStatus"></p>
+      </form>
     </section>
 
     <!-- EVENTS -->
@@ -283,7 +344,7 @@
     document.getElementById('y').textContent = y;
     document.getElementById('y2').textContent = y;
 
-    // anchor smooth scroll (CSS already helps; this is a fallback)
+    // anchor smooth scroll fallback
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
       a.addEventListener('click',e=>{
         const id=a.getAttribute('href'); const el=document.querySelector(id);
@@ -299,6 +360,9 @@
       root.setAttribute('data-lang', lang);
       document.documentElement.lang = lang;
       if (langHidden) langHidden.value = lang;
+      // voter info form hidden lang
+      const viHidden = document.getElementById('langHiddenVI');
+      if (viHidden) viHidden.value = lang;
       if (langDD && langDD.value !== lang) langDD.value = lang;
     }
     if (langDD){
@@ -315,27 +379,23 @@
       return s;
     }
 
-    // submit form to Apps Script
+    // ---- Volunteer form submit ----
     const form = document.getElementById('volunteer');
     const statusEl = document.getElementById('formStatus');
     const submitBtn = form.querySelector('button[type="submit"]');
-
     form.addEventListener('submit', async (e)=>{
       e.preventDefault();
       submitBtn.disabled = true; submitBtn.style.opacity = .7;
       statusEl.textContent = (root.getAttribute('data-lang')==='fr') ? 'Envoi en cours…' : 'Submitting…';
-
       try {
         const fd = new FormData(form);
-        fd.set('phone', toE164(fd.get('phone'))); // Twilio-friendly
+        fd.set('phone', toE164(fd.get('phone')));
         const body = new URLSearchParams(fd).toString();
-
         await fetch(form.action, {
           method:'POST', mode:'no-cors',
           headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},
           body
         });
-
         statusEl.textContent = (root.getAttribute('data-lang')==='fr')
           ? 'Merci! Courriel/SMS envoyés si vous avez consenti.'
           : 'Thanks! Email/SMS sent if you opted in.';
@@ -348,6 +408,40 @@
         submitBtn.disabled = false; submitBtn.style.opacity = 1;
       }
     });
+
+    // ---- Get Voter Information form ----
+    (function wireVoterInfo(){
+      const vForm = document.getElementById('voterinfo');
+      if (!vForm) return;
+      const status = document.getElementById('viStatus');
+      const btn = vForm.querySelector('button[type="submit"]');
+      vForm.addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        const isFr = (root.getAttribute('data-lang')==='fr');
+        status.textContent = isFr ? 'Envoi en cours…' : 'Submitting…';
+        btn.disabled = true; btn.style.opacity = .7;
+        try{
+          const fd = new FormData(vForm);
+          if (fd.get('phone')) fd.set('phone', toE164(fd.get('phone')));
+          const body = new URLSearchParams(fd).toString();
+          await fetch(vForm.action, {
+            method:'POST', mode:'no-cors',
+            headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},
+            body
+          });
+          status.textContent = isFr
+            ? "Merci ! Nous vous avons envoyé les instructions (si vous avez coché Courriel/SMS)."
+            : "Thanks! We've sent the instructions (if you opted Email/SMS).";
+          vForm.reset();
+        } catch(err){
+          status.textContent = isFr
+            ? "Échec de l’envoi. Réessayez ou écrivez-nous."
+            : "Submission failed. Please try again or email us.";
+        } finally{
+          btn.disabled = false; btn.style.opacity = 1;
+        }
+      });
+    })();
   </script>
 </body>
 </html>
