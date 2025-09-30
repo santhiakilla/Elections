@@ -8,10 +8,13 @@
   <link rel="icon" href="favicon.ico" />
   <style>
     :root{
-      --bg: #0a0b10; --card: #10131a; --muted: #8ea0b6; --text: #eaf2ff;
-      --brand: #6ea8ff; --brand-2: #a78bfa; --ring:#3b82f6; --radius:18px;
+      --bg:#0a0b10; --card:#10131a; --muted:#8ea0b6; --text:#eaf2ff;
+      --brand:#6ea8ff; --brand-2:#a78bfa; --ring:#3b82f6; --radius:18px;
     }
     html,body{height:100%}
+    /* smooth anchor scrolling + offset for sticky header */
+    html{scroll-behavior:smooth; scroll-padding-top:90px}
+
     body{margin:0;background:linear-gradient(180deg,#0b1020,#0a0b10 30%,#0a0b10);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
     a{color:var(--brand)} a:hover{opacity:.9}
     .shell{max-width:1120px;margin-inline:auto;padding:32px}
@@ -24,31 +27,20 @@
       radial-gradient(60% 60% at 30% 30%, #8b5cf6 0,#3b82f6 40%, transparent 41%),
       conic-gradient(from 200deg, #60a5fa, #8b5cf6, #60a5fa);
       box-shadow:0 0 0 1px rgba(255,255,255,.08),0 10px 30px rgba(104,129,255,.25)}
-    /* old chip styles kept harmlessly; no longer used
-    .lang-toggle{display:flex;gap:8px;align-items:center}
-    .chip{padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.1);cursor:pointer}
-    .chip.active{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#0b1020;font-weight:700}
-    */
 
-    /* NEW: pill-shaped language dropdown */
-    .lang-dd{position:relative; display:inline-block}
+    /* pill dropdown */
+    .lang-dd{position:relative;display:inline-block}
     .lang-dd select{
-      -webkit-appearance:none; -moz-appearance:none; appearance:none;
+      -webkit-appearance:none;-moz-appearance:none;appearance:none;
       background:rgba(255,255,255,.06);
       border:1px solid rgba(255,255,255,.12);
-      border-radius:999px;
-      color:var(--text);
-      padding:10px 36px 10px 14px;
-      font-weight:700;
-      cursor:pointer;
+      border-radius:999px;color:var(--text);
+      padding:10px 36px 10px 14px;font-weight:700;cursor:pointer;
     }
-    .lang-dd select:focus{outline:none; box-shadow:0 0 0 2px var(--ring)}
-    .lang-dd::after{
-      content:"▾";
-      position:absolute; right:12px; top:50%; transform:translateY(-50%);
-      pointer-events:none; opacity:.7;
-    }
+    .lang-dd select:focus{outline:none;box-shadow:0 0 0 2px var(--ring)}
+    .lang-dd::after{content:"▾";position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;opacity:.7}
 
+    /* sections */
     .hero{padding:72px 0 48px;background:
       radial-gradient(1200px 600px at 10% -10%, rgba(104,129,255,.2), transparent 40%),
       radial-gradient(1200px 600px at 90% -10%, rgba(167,139,250,.18), transparent 45%)}
@@ -56,8 +48,9 @@
     .hero p{font-size:clamp(16px,2.2vw,20px);color:var(--muted);margin:0 0 22px}
     .cta{display:flex;gap:12px;flex-wrap:wrap}
     .btn{appearance:none;border:0;border-radius:14px;padding:12px 18px;font-weight:700;cursor:pointer}
-    .btn.primary{background:linear-gradient(135deg,var(--brand), var(--brand-2));color:#0b1020;box-shadow:0 10px 30px rgba(104,129,255,.35)}
+    .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#0b1020;box-shadow:0 10px 30px rgba(104,129,255,.35)}
     .btn.ghost{background:rgba(255,255,255,.06);color:var(--text);border:1px solid rgba(255,255,255,.1)}
+
     .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
     .card{grid-column:span 12;background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:20px}
     @media(min-width:820px){.card{grid-column:span 6}}
@@ -67,17 +60,22 @@
     section{padding:38px 0}
     .title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px}
     .title h2{margin:0;font-size:26px}
+
     .info{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
     .blk{grid-column:span 12;background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:20px}
     @media(min-width:820px){.blk{grid-column:span 6}}
+
     form{display:grid;gap:12px}
     input,select,textarea{background:#0e1118;color:var(--text);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 14px}
     label{font-weight:600}
     .row{display:grid;gap:12px}
     @media(min-width:720px){.row{grid-template-columns:1fr 1fr}}
+
     .foot{margin-top:36px;font-size:13px;color:var(--muted)}
     .footer{margin-top:48px;padding:22px;border-top:1px solid rgba(255,255,255,.08);color:var(--muted)}
     .pill{display:inline-block;margin-right:8px;margin-bottom:8px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+
+    /* bilingual visibility */
     [data-lang="en"] .lang-fr{display:none}
     [data-lang="fr"] .lang-en{display:none}
   </style>
@@ -85,7 +83,7 @@
 <body>
   <header>
     <div class="shell nav">
-      <div class="brand"><div class="logo" aria-hidden="true"></div> <span>Vieux-Saint-Hubert–La Savane</span></div>
+      <div class="brand"><div class="logo" aria-hidden="true"></div><span>Vieux-Saint-Hubert–La Savane</span></div>
       <nav>
         <a href="#vision">Vision</a>
         <a href="#vote">Voting Info</a>
@@ -94,8 +92,7 @@
         <a href="#involved">Get Involved</a>
         <a href="#contact">Contact</a>
       </nav>
-
-      <!-- NEW: pill-shaped dropdown -->
+      <!-- language dropdown -->
       <label class="lang-dd" for="lang-dd" aria-label="Language">
         <select id="lang-dd" aria-label="Language select">
           <option value="en">EN</option>
@@ -107,13 +104,104 @@
 
   <main>
     <!-- HERO -->
-    <!-- ... [omitted for brevity: hero, vision, vote, events, news sections unchanged] ... -->
+    <section class="hero">
+      <div class="shell">
+        <div class="lang-en">
+          <h1>Vote for Progress!<br/>Vote for Vieux-Saint-Hubert–La Savane!</h1>
+          <p>Building a healthier, greener, and more connected community — together.</p>
+          <div class="cta">
+            <a class="btn primary" href="#involved">Volunteer Today</a>
+            <a class="btn ghost" href="#vote">How to Vote</a>
+          </div>
+        </div>
+        <div class="lang-fr">
+          <h1>Votez pour le progrès!<br/>Votez pour Vieux-Saint-Hubert–La Savane!</h1>
+          <p>Ensemble, bâtissons une communauté plus saine, plus verte et mieux connectée.</p>
+          <div class="cta">
+            <a class="btn primary" href="#involved">Devenez bénévole</a>
+            <a class="btn ghost" href="#vote">Comment voter</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISION -->
+    <section id="vision" class="shell">
+      <div class="lang-en">
+        <div class="title"><h2>Community Development Plan</h2><span class="badge">Our Priorities</span></div>
+        <div class="grid">
+          <article class="card"><h3>🌳 Elderly Engagement</h3><ul class="list"><li>Launch a Seniors’ Social Club for social events, wellness activities, and community connection.</li></ul></article>
+          <article class="card"><h3>💙 Health &amp; Wellness</h3><ul class="list"><li>Partner with medical schools for free health camps, offering accessible check-ups for all.</li></ul></article>
+          <article class="card"><h3>🏊 Recreational Facilities</h3><ul class="list"><li>Push for water parks and expanded free public swimming pools.</li></ul></article>
+          <article class="card"><h3>🚀 Sustainable Mobility</h3><ul class="list"><li>Install e-scooter charging stations at schools and workplaces.</li></ul></article>
+          <article class="card"><h3>🤝 Community Support</h3><ul class="list"><li>Stay accessible and approachable, addressing your concerns with dedication and care.</li></ul></article>
+          <article class="card"><h3>🌼 Environmental Development</h3><ul class="list"><li>Beautify parks and streets with greenery and public art.</li></ul></article>
+          <article class="card"><h3>💼 Economic Growth</h3><ul class="list"><li>Boost small businesses, local markets, and entrepreneurship to create jobs.</li></ul></article>
+        </div>
+      </div>
+      <div class="lang-fr">
+        <div class="title"><h2>Plan de développement communautaire</h2><span class="badge">Nos priorités</span></div>
+        <div class="grid">
+          <article class="card"><h3>🌳 Participation des aînés</h3><ul class="list"><li>Créer un Club social des aînés pour des activités sociales, de bien-être et de rencontre.</li></ul></article>
+          <article class="card"><h3>💙 Santé et bien-être</h3><ul class="list"><li>Partenariats avec des écoles de médecine pour des cliniques de santé gratuites et accessibles.</li></ul></article>
+          <article class="card"><h3>🏊 Installations récréatives</h3><ul class="list"><li>Développer des parcs aquatiques et élargir l’accès gratuit aux piscines publiques.</li></ul></article>
+          <article class="card"><h3>🚀 Mobilité durable</h3><ul class="list"><li>Installer des bornes de recharge pour trottinettes dans les écoles et milieux de travail.</li></ul></article>
+          <article class="card"><h3>🤝 Soutien à la communauté</h3><ul class="list"><li>Être accessible et à l’écoute, avec un suivi dévoué de vos préoccupations.</li></ul></article>
+          <article class="card"><h3>🌼 Environnement</h3><ul class="list"><li>Embellir parcs et rues avec de la verdure et de l’art public.</li></ul></article>
+          <article class="card"><h3>💼 Croissance économique</h3><ul class="list"><li>Soutenir les petites entreprises, les marchés locaux et l’entrepreneuriat pour créer des emplois.</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- VOTING INFO -->
+    <section id="vote" class="shell">
+      <div class="lang-en">
+        <div class="title"><h2>🗳️ Voting Information</h2><span class="badge">Make your voice heard</span></div>
+        <div class="info">
+          <div class="blk"><h3>Advance Voting</h3><p><strong>Saturday, October 26</strong>: 12:00 PM – 8:00 PM</p></div>
+          <div class="blk"><h3>Returning Officer’s Office</h3><p><strong>Friday, October 24</strong>: 4:00 PM – 8:00 PM</p><p><strong>Sat, Oct 25 – Wed, Oct 29</strong>: Check local schedule at <em>[Insert Municipal Website]</em>.</p></div>
+          <div class="blk"><h3>Mobile Voting</h3><p>Available for electors on the Electors List. File the Mobile Polling Registration Form.</p></div>
+          <div class="blk"><h3>Voting by Mail</h3><p>For non-domiciled electors (owners/co-owners; occupants/co-occupants of businesses). Contact the municipality.</p></div>
+        </div>
+        <p class="foot">Need help? Our team can guide you through any option. Reach out at <strong>[Insert Contact Info]</strong>.</p>
+      </div>
+      <div class="lang-fr">
+        <div class="title"><h2>🗳️ Informations sur le vote</h2><span class="badge">Faites entendre votre voix</span></div>
+        <div class="info">
+          <div class="blk"><h3>Vote par anticipation</h3><p><strong>Samedi 26 octobre</strong> : 12 h – 20 h</p></div>
+          <div class="blk"><h3>Bureau du président d’élection</h3><p><strong>Vendredi 24 octobre</strong> : 16 h – 20 h</p><p><strong>Samedi 25 au mercredi 29 octobre</strong> : Consultez l’horaire sur <em>[Site municipal]</em>.</p></div>
+          <div class="blk"><h3>Vote itinérant</h3><p>Offert aux électeurs inscrits. Remplissez le formulaire d’inscription au vote itinérant.</p></div>
+          <div class="blk"><h3>Vote par correspondance</h3><p>Pour les électeurs non domiciliés (propriétaires/coprop.; occupants/co-occup. d’établissements). Communiquez avec la municipalité.</p></div>
+        </div>
+        <p class="foot">Besoin d’aide? Notre équipe vous accompagne pour toute démarche : <strong>[Coordonnées]</strong>.</p>
+      </div>
+    </section>
+
+    <!-- EVENTS -->
+    <section id="events" class="shell">
+      <div class="title"><h2 class="lang-en">📅 Upcoming Events</h2><h2 class="lang-fr">📅 Événements à venir</h2><span class="badge">Community</span></div>
+      <div class="grid">
+        <article class="card"><h3>🚪 Door-to-Door — La Savane</h3><p class="lang-en">Meet neighbors and hear what matters most. <strong>Sat 14:00</strong></p><p class="lang-fr">Rencontres de quartier et échanges. <strong>Sam 14 h</strong></p></article>
+        <article class="card"><h3>☕ Coffee Chat — Gaétan-Boucher</h3><p class="lang-en">Informal Q&A with the candidate. <strong>Sun 10:00</strong></p><p class="lang-fr">Rencontre informelle avec le candidat. <strong>Dim 10 h</strong></p></article>
+      </div>
+    </section>
+
+    <!-- NEWS -->
+    <section id="news" class="shell">
+      <div class="title"><h2 class="lang-en">📰 Latest News</h2><h2 class="lang-fr">📰 Nouvelles</h2><span class="badge">Updates</span></div>
+      <div class="grid">
+        <article class="card"><h3>Park cleanup success</h3><p class="lang-en">Thanks to 42 volunteers, we collected 120 kg of trash at Parc de la Savane.</p><p class="lang-fr">Grâce à 42 bénévoles, nous avons ramassé 120 kg de déchets au parc de la Savane.</p></article>
+        <article class="card"><h3>Candidate town hall</h3><p class="lang-en">Replay available soon with key takeaways.</p><p class="lang-fr">La rediffusion sera disponible bientôt avec les points saillants.</p></article>
+      </div>
+    </section>
 
     <!-- GET INVOLVED -->
     <section id="involved" class="shell">
       <div class="title"><h2 class="lang-en">📞 Get Involved</h2><h2 class="lang-fr">📞 S’impliquer</h2><span class="badge">Volunteer • Donate • Share</span></div>
 
-      <form id="volunteer" method="POST" action="https://script.google.com/macros/s/AKfycbzAuD7lDzSMKjwtVctrvlIFFmWtbtN_KsA12w_x3AOuLfTs2dadvyipB3cTxc1USzo1/exec" novalidate>
+      <form id="volunteer" method="POST"
+            action="https://script.google.com/macros/s/AKfycbzAuD7lDzSMKjwtVctrvlIFFmWtbtN_KsA12w_x3AOuLfTs2dadvyipB3cTxc1USzo1/exec"
+            novalidate>
         <input type="hidden" name="lang" id="langHidden" value="en" />
         <div class="row">
           <div>
@@ -169,7 +257,20 @@
     </section>
 
     <!-- CONTACT -->
-    <!-- [unchanged from your version] -->
+    <section id="contact" class="shell">
+      <div class="title"><h2 class="lang-en">Contact</h2><h2 class="lang-fr">Contact</h2><span class="badge">We’re here for you • À votre écoute</span></div>
+      <div class="info">
+        <div class="blk">
+          <h3 class="lang-en">General Inquiries</h3><h3 class="lang-fr">Renseignements généraux</h3>
+          <p>Email: <a href="mailto:info@example.com">info@example.com</a><br/>Phone: <a href="tel:+10000000000">+1 (000) 000-0000</a></p>
+        </div>
+        <div class="blk">
+          <h3 class="lang-en">Media & Press</h3><h3 class="lang-fr">Médias & presse</h3>
+          <p>Email: <a href="mailto:press@example.com">press@example.com</a></p>
+        </div>
+      </div>
+      <p class="foot"><span class="lang-en">Authorized by</span><span class="lang-fr">Autorisé par</span> <strong>[Agent’s Name]</strong>. <span class="lang-en">Paid for by</span><span class="lang-fr">Payé par</span> <strong>[Campaign Name]</strong>. © <span id="y"></span></p>
+    </section>
   </main>
 
   <footer class="footer shell">
@@ -177,51 +278,74 @@
   </footer>
 
   <script>
+    // year stamps
     const y = new Date().getFullYear();
     document.getElementById('y').textContent = y;
     document.getElementById('y2').textContent = y;
 
-    // Smooth scroll
+    // anchor smooth scroll (CSS already helps; this is a fallback)
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click',e=>{const id=a.getAttribute('href');const el=document.querySelector(id);if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'});}})
-    })
+      a.addEventListener('click',e=>{
+        const id=a.getAttribute('href'); const el=document.querySelector(id);
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); }
+      });
+    });
 
-    // Language dropdown
+    // language dropdown
     const root = document.documentElement;
     const langHidden = document.getElementById('langHidden');
     const langDD = document.getElementById('lang-dd');
-
     function setLang(lang){
       root.setAttribute('data-lang', lang);
       document.documentElement.lang = lang;
       if (langHidden) langHidden.value = lang;
       if (langDD && langDD.value !== lang) langDD.value = lang;
     }
-
     if (langDD){
       langDD.addEventListener('change', ()=> setLang(langDD.value));
       const initial = document.documentElement.getAttribute('data-lang') || 'en';
-      langDD.value = initial;
-      setLang(initial);
+      langDD.value = initial; setLang(initial);
     }
 
-    // Submit form
+    // normalize phone to E.164 (+1XXXXXXXXXX for 10-digit CA/US)
+    function toE164(raw){
+      let s = String(raw||'').replace(/[^\d+]/g,'');
+      if (s.startsWith('+')) return s;
+      if (s.length === 10) return '+1' + s;
+      return s;
+    }
+
+    // submit form to Apps Script
     const form = document.getElementById('volunteer');
     const statusEl = document.getElementById('formStatus');
+    const submitBtn = form.querySelector('button[type="submit"]');
+
     form.addEventListener('submit', async (e)=>{
       e.preventDefault();
+      submitBtn.disabled = true; submitBtn.style.opacity = .7;
       statusEl.textContent = (root.getAttribute('data-lang')==='fr') ? 'Envoi en cours…' : 'Submitting…';
+
       try {
-        const body = new URLSearchParams(new FormData(form)).toString();
-        await fetch(form.action, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' }, body });
+        const fd = new FormData(form);
+        fd.set('phone', toE164(fd.get('phone'))); // Twilio-friendly
+        const body = new URLSearchParams(fd).toString();
+
+        await fetch(form.action, {
+          method:'POST', mode:'no-cors',
+          headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},
+          body
+        });
+
         statusEl.textContent = (root.getAttribute('data-lang')==='fr')
-          ? 'Merci! Nous vous contacterons bientôt.'
-          : 'Thanks! We’ll be in touch soon.';
+          ? 'Merci! Courriel/SMS envoyés si vous avez consenti.'
+          : 'Thanks! Email/SMS sent if you opted in.';
         form.reset();
-      } catch (err) {
+      } catch (err){
         statusEl.textContent = (root.getAttribute('data-lang')==='fr')
           ? 'Échec de l’envoi. Réessayez ou écrivez-nous.'
           : 'Submission failed. Please try again or email us.';
+      } finally{
+        submitBtn.disabled = false; submitBtn.style.opacity = 1;
       }
     });
   </script>
