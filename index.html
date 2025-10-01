@@ -174,68 +174,105 @@
         <span class="badge">We’ll follow up</span>
       </div>
 
-      <form id="voterinfo" method="POST"
-            action="https://script.google.com/macros/s/AKfycbzAuD7lDzSMKjwtVctrvlIFFmWtbtN_KsA12w_x3AOuLfTs2dadvyipB3cTxc1USzo1/exec"
-            novalidate>
-        <input type="hidden" name="lang" value="en" id="langHiddenVI" />
-        <div class="row">
-          <div>
-            <label for="vi_name" class="lang-en">Full Name</label>
-            <label for="vi_name" class="lang-fr">Nom complet</label>
-            <input id="vi_name" name="name" placeholder="Jane Doe" required />
-          </div>
-          <div>
-            <label for="vi_email" class="lang-en">Email</label>
-            <label for="vi_email" class="lang-fr">Courriel</label>
-            <input id="vi_email" type="email" name="email" placeholder="you@example.com" required />
-          </div>
-        </div>
+      <!--
+HOW TO APPLY THIS PATCH
+1) Open your index.html.
+2) Find the existing voter-info form block by searching for:
+     <form id="voterinfo"
+3) Replace EVERYTHING from that opening <form ...> up to its closing </form>
+   with the block below.
+4) Keep your existing <script> handlers — the field names now match your Apps
+   Script (vote_choice), so the emails/SMS will fire.
 
-        <div class="row">
-          <div>
-            <label for="vi_phone" class="lang-en">Phone (optional)</label>
-            <label for="vi_phone" class="lang-fr">Téléphone (facultatif)</label>
-            <input id="vi_phone" name="phone" placeholder="(xxx) xxx-xxxx" />
-          </div>
-          <div>
-            <label for="vi_method" class="lang-en">How would you like to vote?</label>
-            <label for="vi_method" class="lang-fr">Comment voulez-vous voter ?</label>
-            <select id="vi_method" name="vote_method" required>
-              <option value="advance" class="lang-en">Advance Voting</option>
-              <option value="mobile"  class="lang-en">Mobile voting</option>
-              <option value="office"  class="lang-en">Returning Officer’s Office</option>
-              <option value="mail"    class="lang-en">Voting by Mail</option>
-              <option value="advance" class="lang-fr">Vote par anticipation</option>
-              <option value="mobile"  class="lang-fr">Vote itinérant</option>
-              <option value="office"  class="lang-fr">Bureau du président d’élection</option>
-              <option value="mail"    class="lang-fr">Vote par correspondance</option>
-            </select>
-          </div>
-        </div>
+Notes
+- The select's name is vote_choice (was vote_method).
+- The option values match your Apps Script keys exactly:
+  "Advance Voting", "Mobile voting", "Returning Officer’s Office", "Voting by Mail".
+- The hidden lang field (langHiddenVI) is present so your script can localize.
+-->
 
-        <div>
-          <label><input type="checkbox" name="opt_email" />
-            <span class="lang-en">Email me these instructions.</span>
-            <span class="lang-fr">Envoyez-moi les instructions par courriel.</span>
-          </label>
-          <label><input type="checkbox" name="opt_sms" />
-            <span class="lang-en">Text me these instructions.</span>
-            <span class="lang-fr">Envoyez-moi les instructions par SMS.</span>
-          </label>
-          <small class="foot">
-            <span class="lang-en">You can unsubscribe anytime. SMS: reply STOP. Email: reply UNSUBSCRIBE.</span>
-            <span class="lang-fr">Vous pouvez vous désabonner en tout temps. SMS : répondez STOP. Courriel : répondez UNSUBSCRIBE.</span>
-          </small>
-        </div>
+<form id="voterinfo" method="POST"
+      action="https://script.google.com/macros/s/AKfycbzAuD7lDzSMKjwtVctrvlIFFmWtbtN_KsA12w_x3AOuLfTs2dadvyipB3cTxc1USzo1/exec"      
+      novalidate>
+  <input type="hidden" name="lang" value="en" id="langHiddenVI" />
 
-        <div style="display:flex;gap:12px;flex-wrap:wrap">
-          <button class="btn primary" type="submit">
-            <span class="lang-en">Send me voting info</span>
-            <span class="lang-fr">Envoyez-moi les infos</span>
-          </button>
-        </div>
-        <p class="foot" id="viStatus"></p>
-      </form>
+  <div class="row">
+    <div>
+      <label for="vi_name" class="lang-en">Full Name</label>
+      <label for="vi_name" class="lang-fr">Nom complet</label>
+      <input id="vi_name" name="name" placeholder="Jane Doe" required />
+    </div>
+    <div>
+      <label for="vi_email" class="lang-en">Email</label>
+      <label for="vi_email" class="lang-fr">Courriel</label>
+      <input id="vi_email" type="email" name="email" placeholder="you@example.com" required />
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <label for="vi_phone" class="lang-en">Phone (optional)</label>
+      <label for="vi_phone" class="lang-fr">Téléphone (facultatif)</label>
+      <input id="vi_phone" name="phone" placeholder="(xxx) xxx-xxxx" />
+    </div>
+    <div>
+      <label for="vi_method" class="lang-en">How would you like to vote?</label>
+      <label for="vi_method" class="lang-fr">Comment voulez-vous voter ?</label>
+      <!-- 🔑 name MUST be vote_choice to match Apps Script -->
+      <select id="vi_method" name="vote_choice" required>
+        <!-- EN options (values are the canonical keys your script uses) -->
+        <option value="Advance Voting" class="lang-en">Advance Voting</option>
+        <option value="Mobile voting"  class="lang-en">Mobile voting</option>
+        <option value="Returning Officer’s Office" class="lang-en">Returning Officer’s Office</option>
+        <option value="Voting by Mail" class="lang-en">Voting by Mail</option>
+        <!-- FR labels mapped to the same values -->
+        <option value="Advance Voting" class="lang-fr">Vote par anticipation</option>
+        <option value="Mobile voting"  class="lang-fr">Vote itinérant</option>
+        <option value="Returning Officer’s Office" class="lang-fr">Bureau du président d’élection</option>
+        <option value="Voting by Mail" class="lang-fr">Vote par correspondance</option>
+      </select>
+    </div>
+  </div>
+
+  <div>
+    <label><input type="checkbox" name="opt_email" />
+      <span class="lang-en">Email me these instructions.</span>
+      <span class="lang-fr">Envoyez-moi les instructions par courriel.</span>
+    </label>
+    <label><input type="checkbox" name="opt_sms" />
+      <span class="lang-en">Text me these instructions.</span>
+      <span class="lang-fr">Envoyez-moi les instructions par SMS.</span>
+    </label>
+    <small class="foot">
+      <span class="lang-en">You can unsubscribe anytime. SMS: reply STOP. Email: reply UNSUBSCRIBE.</span>
+      <span class="lang-fr">Vous pouvez vous désabonner en tout temps. SMS : répondez STOP. Courriel : répondez UNSUBSCRIBE.</span>
+    </small>
+  </div>
+
+  <div style="display:flex;gap:12px;flex-wrap:wrap">
+    <button class="btn primary" type="submit">
+      <span class="lang-en">Send me voting info</span>
+      <span class="lang-fr">Envoyez-moi les infos</span>
+    </button>
+  </div>
+  <p class="foot" id="viStatus"></p>
+</form>
+
+<!-- Optional helper: keep hidden lang in sync with site language. If you already
+     have this logic in your <script>, you can skip. -->
+<script>
+  (function(){
+    var root = document.documentElement;
+    var viLang = document.getElementById('langHiddenVI');
+    function syncLang(){ if(viLang) viLang.value = root.getAttribute('data-lang')||'en'; }
+    syncLang();
+    // If your page has language toggle calling setLang(), ensure it calls syncLang() too
+    // or duplicate this listener with your own event.
+    document.addEventListener('language-changed', syncLang);
+  })();
+</script>
+
+
     </section>
 
     <!-- EVENTS -->
