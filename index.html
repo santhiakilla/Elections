@@ -1,484 +1,605 @@
 <!DOCTYPE html>
 <html lang="en" data-lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Vote for Progress — Vieux-Saint-Hubert–La Savane</title>
-  <meta name="description" content="Election campaign website for Vieux-Saint-Hubert–La Savane. Get involved, read the platform, and find voting information." />
-  <link rel="icon" href="favicon.ico" />
-  <style>
-    :root{ --bg:#0a0b10; --card:#10131a; --muted:#8ea0b6; --text:#eaf2ff; --brand:#6ea8ff; --brand-2:#a78bfa; --ring:#3b82f6; --radius:18px; }
-    html,body{height:100%}
-    html{scroll-behavior:smooth; scroll-padding-top:90px}
-    body{margin:0;background:linear-gradient(180deg,#0b1020,#0a0b10 30%,#0a0b10);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
-    a{color:var(--brand)} a:hover{opacity:.9}
-    .shell{max-width:1120px;margin-inline:auto;padding:32px}
-    header{position:sticky;top:0;backdrop-filter:blur(10px);background:rgba(10,11,16,.6);border-bottom:1px solid rgba(255,255,255,.06);z-index:50}
-    .nav{display:flex;align-items:center;gap:16px;justify-content:space-between}
-    .nav a{padding:10px 14px;border-radius:10px;text-decoration:none;color:var(--text);opacity:.9}
-    .nav a:hover{background:rgba(255,255,255,.06);opacity:1}
-    .brand{display:flex;align-items:center;gap:12px;font-weight:700}
-    .logo{width:36px;height:36px;border-radius:12px;background:
-      radial-gradient(60% 60% at 30% 30%, #8b5cf6 0,#3b82f6 40%, transparent 41%),
-      conic-gradient(from 200deg, #60a5fa, #8b5cf6, #60a5fa);
-      box-shadow:0 0 0 1px rgba(255,255,255,.08),0 10px 30px rgba(104,129,255,.25)}
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vote for Progress — Vieux-Saint-Hubert–La Savane</title>
+    <meta name="description" content="Election campaign website for Vieux-Saint-Hubert–La Savane. Get involved, read the platform, and find voting information." />
+    <link rel="icon" href="favicon.ico" />
+    <style>
+      :root{
+        --bg:#0a0b10; --card:#10131a; --muted:#8ea0b6; --text:#eaf2ff;
+        --brand:#6ea8ff; --brand-2:#a78bfa; --ring:#3b82f6; --radius:18px;
+      }
 
-    /* pill dropdown */
-    .lang-dd{position:relative;display:inline-block}
-    .lang-dd select{
-      -webkit-appearance:none;-moz-appearance:none;appearance:none;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:999px;color:var(--text);
-      padding:10px 36px 10px 14px;font-weight:700;cursor:pointer;
-    }
-    .lang-dd select:focus{outline:none;box-shadow:0 0 0 2px var(--ring)}
-    .lang-dd::after{content:"▾";position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;opacity:.7}
+      html,body{height:100%}
+      html{scroll-behavior:smooth; scroll-padding-top:90px}
 
-    /* sections / cards */
-    .hero{padding:72px 0 48px;background:
-      radial-gradient(1200px 600px at 10% -10%, rgba(104,129,255,.2), transparent 40%),
-      radial-gradient(1200px 600px at 90% -10%, rgba(167,139,250,.18), transparent 45%)}
-    .hero h1{font-size:clamp(28px,5vw,48px);line-height:1.1;margin:0 0 14px}
-    .hero p{font-size:clamp(16px,2.2vw,20px);color:var(--muted);margin:0 0 22px}
-    .cta{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{appearance:none;border:0;border-radius:14px;padding:12px 18px;font-weight:700;cursor:pointer}
-    .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#0b1020;box-shadow:0 10px 30px rgba(104,129,255,.35)}
-    .btn.ghost{background:rgba(255,255,255,.06);color:var(--text);border:1px solid rgba(255,255,255,.1)}
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
-    .card{grid-column:span 12;background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:20px}
-    @media(min-width:820px){.card{grid-column:span 6}}
-    .card h3{margin:0 0 8px;font-size:20px}
-    .badge{display:inline-block;background:rgba(104,129,255,.18);border:1px solid rgba(104,129,255,.35);padding:2px 10px;border-radius:999px;font-size:12px;color:#dbe8ff}
-    .list{margin:10px 0 0;padding-left:18px}
-    section{padding:38px 0}
-    .title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px}
-    .title h2{margin:0;font-size:26px}
-    .info{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
-    .blk{grid-column:span 12;background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:20px}
-    @media(min-width:820px){.blk{grid-column:span 6}}
-    form{display:grid;gap:12px}
-    input,select,textarea{background:#0e1118;color:var(--text);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 14px}
-    label{font-weight:600}
-    .row{display:grid;gap:12px}
-    @media(min-width:720px){.row{grid-template-columns:1fr 1fr}}
-    .foot{margin-top:36px;font-size:13px;color:var(--muted)}
-    .footer{margin-top:48px;padding:22px;border-top:1px solid rgba(255,255,255,.08);color:var(--muted)}
-    .pill{display:inline-block;margin-right:8px;margin-bottom:8px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
-    [data-lang="en"] .lang-fr{display:none}
-    [data-lang="fr"] .lang-en{display:none}
-  </style>
-</head>
-<body>
-  <header>
-    <div class="shell nav">
-      <div class="brand"><div class="logo" aria-hidden="true"></div><span>Vieux-Saint-Hubert–La Savane</span></div>
-      <nav>
-        <a href="#vision">Vision</a>
-        <a href="#vote">Voting Info</a>
-        <a href="#getvoterinfo">Voter Info</a>
-        <a href="#events">Events</a>
-        <a href="#news">News</a>
-        <a href="#involved">Get Involved</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <label class="lang-dd" for="lang-dd" aria-label="Language">
-        <select id="lang-dd" aria-label="Language select">
-          <option value="en">EN</option>
-          <option value="fr">FR</option>
-        </select>
-      </label>
-    </div>
-  </header>
+      body{
+        margin:0;
+        background:linear-gradient(180deg,#0b1020,#0a0b10 30%,#0a0b10);
+        color:var(--text);
+        font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+        padding-top:80px; /* space for fixed header */
+      }
 
-  <main>
-    <!-- HERO -->
-    <section class="hero">
-      <div class="shell">
+      a{color:var(--brand)} a:hover{opacity:.9}
+
+      .shell{max-width:1120px;margin-inline:auto;padding:32px}
+
+      /* ===== Fixed header (frozen) ===== */
+      header{
+        position:fixed; top:0; left:0; width:100%; z-index:1000;
+        backdrop-filter:blur(10px);
+        background:rgba(10,11,16,.9);
+        border-bottom:1px solid rgba(255,255,255,.06);
+      }
+      .nav{display:flex;align-items:center;gap:16px;justify-content:space-between}
+      .nav a{padding:10px 14px;border-radius:10px;text-decoration:none;color:var(--text);opacity:.9}
+      .nav a:hover{background:rgba(255,255,255,.06);opacity:1}
+      .brand{display:flex;align-items:center;gap:12px;font-weight:700}
+      .logo{width:36px;height:36px;border-radius:12px;background:
+        radial-gradient(60% 60% at 30% 30%, #8b5cf6 0,#3b82f6 40%, transparent 41%),
+        conic-gradient(from 200deg, #60a5fa, #8b5cf6, #60a5fa);
+        box-shadow:0 0 0 1px rgba(255,255,255,.08),0 10px 30px rgba(104,129,255,.25)}
+
+      /* language pill */
+      .lang-dd{position:relative;display:inline-block}
+      .lang-dd select{
+        -webkit-appearance:none;-moz-appearance:none;appearance:none;
+        background:rgba(255,255,255,.06);
+        border:1px solid rgba(255,255,255,.12);
+        border-radius:999px;color:var(--text);
+        padding:10px 36px 10px 14px;font-weight:700;cursor:pointer;
+      }
+      .lang-dd select:focus{outline:none;box-shadow:0 0 0 2px var(--ring)}
+      .lang-dd::after{content:"▾";position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;opacity:.7}
+
+      /* ===== Sections / cards ===== */
+      .hero{
+        position:relative;
+        padding:120px 0 64px;         /* more room so text never hides under photo */
+        overflow:hidden;
+        background:
+          radial-gradient(1200px 600px at 10% -10%, rgba(104,129,255,.2), transparent 40%),
+          radial-gradient(1200px 600px at 90% -10%, rgba(167,139,250,.18), transparent 45%);
+      }
+      /* make space on the right for the portrait so text never overlaps */
+      .hero .shell{padding-right:clamp(0px, 34vw, 420px)}
+
+      .hero h1{font-size:clamp(28px,5vw,48px);line-height:1.1;margin:0 0 14px}
+      .hero p{font-size:clamp(16px,2.2vw,20px);color:var(--muted);margin:0 0 22px}
+      .cta{display:flex;gap:12px;flex-wrap:wrap}
+      .btn{appearance:none;border:0;border-radius:14px;padding:12px 18px;font-weight:700;cursor:pointer}
+      .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#0b1020;box-shadow:0 10px 30px rgba(104,129,255,.35)}
+      .btn.ghost{background:rgba(255,255,255,.06);color:var(--text);border:1px solid rgba(255,255,255,.1)}
+
+      .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+      .card{grid-column:span 12;background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:20px}
+      @media(min-width:820px){.card{grid-column:span 6}}
+      .card h3{margin:0 0 8px;font-size:20px}
+      .badge{display:inline-block;background:rgba(104,129,255,.18);border:1px solid rgba(104,129,255,.35);padding:2px 10px;border-radius:999px;font-size:12px;color:#dbe8ff}
+      .list{margin:10px 0 0;padding-left:18px}
+      section{padding:38px 0}
+      .title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px}
+      .title h2{margin:0;font-size:26px}
+      .info{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+      .blk{grid-column:span 12;background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:20px}
+      @media(min-width:820px){.blk{grid-column:span 6}}
+      form{display:grid;gap:12px}
+      input,select,textarea{background:#0e1118;color:var(--text);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 14px}
+      label{font-weight:600}
+      .row{display:grid;gap:12px}
+      @media(min-width:720px){.row{grid-template-columns:1fr 1fr}}
+      .foot{margin-top:36px;font-size:13px;color:var(--muted)}
+      .footer{margin-top:48px;padding:22px;border-top:1px solid rgba(255,255,255,.08);color:var(--muted)}
+      .pill{display:inline-block;margin-right:8px;margin-bottom:8px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+
+      /* language visibility */
+      [data-lang="en"] .lang-fr{display:none}
+      [data-lang="fr"] .lang-en{display:none}
+
+      /* ===== Big hero photo on the right ===== */
+      .candidate-hero{
+        position:absolute; right:3%; top:50%; transform:translateY(-50%);
+        width:min(34vw, 420px); border-radius:18px; overflow:hidden;
+        background:#0e1118; border:1px solid rgba(255,255,255,.06);
+        box-shadow:0 18px 45px rgba(0,0,0,.55);
+      }
+      .candidate-hero img{width:100%;height:auto;display:block;object-fit:cover}
+      @media(max-width:1200px){ .candidate-hero{ right:2%; width:min(36vw, 360px); top:46%; } }
+      @media(max-width:980px){  .candidate-hero{ right:2%; width:min(40vw, 320px); top:44%; } }
+      @media(max-width:760px){  .candidate-hero{ display:none } /* hide on phones */ }
+
+      /* Optional: hide Mailchimp button until you have a real link */
+      .btn.mailchimp{ display:none }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="shell nav">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <span>Vieux-Saint-Hubert–La Savane</span>
+        </div>
+        <nav>
+          <a href="#vision">Vision</a>
+          <a href="#vote">Voting Info</a>
+          <a href="#getvoterinfo">Voter Info</a>
+          <a href="#events">Events</a>
+          <a href="#news">News</a>
+          <a href="#involved">Get Involved</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <label class="lang-dd" for="lang-dd" aria-label="Language">
+          <select id="lang-dd" aria-label="Language select">
+            <option value="en">EN</option>
+            <option value="fr">FR</option>
+          </select>
+        </label>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero">
+        <div class="shell">
+          <div class="lang-en">
+            <h1>Vote for Progress!<br />Vote for Vieux-Saint-Hubert–La Savane!</h1>
+            <p>Building a healthier, greener, and more connected community — together.</p>
+            <div class="cta">
+              <a class="btn primary" href="#involved">Volunteer Today</a>
+              <a class="btn ghost" href="#vote">How to Vote</a>
+            </div>
+          </div>
+          <div class="lang-fr">
+            <h1>Votez pour le progrès!<br />Votez pour Vieux-Saint-Hubert–La Savane!</h1>
+            <p>Ensemble, bâtissons une communauté plus saine, plus verte et mieux connectée.</p>
+            <div class="cta">
+              <a class="btn primary" href="#involved">Devenez bénévole</a>
+              <a class="btn ghost" href="#vote">Comment voter</a>
+            </div>
+          </div>
+        </div>
+        <!-- Candidate image -->
+        <div class="candidate-hero" aria-label="Candidate">
+          <img src="akilla.jpg" alt="Prasanthi Akilla" />
+        </div>
+      </section>
+
+      <!-- VISION -->
+      <section id="vision" class="shell">
         <div class="lang-en">
-          <h1>Vote for Progress!<br/>Vote for Vieux-Saint-Hubert–La Savane!</h1>
-          <p>Building a healthier, greener, and more connected community — together.</p>
-          <div class="cta">
-            <a class="btn primary" href="#involved">Volunteer Today</a>
-            <a class="btn ghost" href="#vote">How to Vote</a>
+          <div class="title">
+            <h2>Community Development Plan</h2>
+            <span class="badge">Our Priorities</span>
+          </div>
+          <div class="grid">
+            <article class="card"><h3>🌳 Elderly Engagement</h3><ul class="list"><li>Launch a Seniors’ Social Club for social events, wellness activities, and community connection.</li></ul></article>
+            <article class="card"><h3>💙 Health &amp; Wellness</h3><ul class="list"><li>Partner with medical schools for free health camps, offering accessible check-ups for all.</li></ul></article>
+            <article class="card"><h3>🏊 Recreational Facilities</h3><ul class="list"><li>Push for water parks and expanded free public swimming pools.</li></ul></article>
+            <article class="card"><h3>🚀 Sustainable Mobility</h3><ul class="list"><li>Install e-scooter charging stations at schools and workplaces.</li></ul></article>
+            <article class="card"><h3>🤝 Community Support</h3><ul class="list"><li>Stay accessible and approachable, addressing your concerns with dedication and care.</li></ul></article>
+            <article class="card"><h3>🌼 Environmental Development</h3><ul class="list"><li>Beautify parks and streets with greenery and public art.</li></ul></article>
+            <article class="card"><h3>💼 Economic Growth</h3><ul class="list"><li>Boost small businesses, local markets, and entrepreneurship to create jobs.</li></ul></article>
           </div>
         </div>
         <div class="lang-fr">
-          <h1>Votez pour le progrès!<br/>Votez pour Vieux-Saint-Hubert–La Savane!</h1>
-          <p>Ensemble, bâtissons une communauté plus saine, plus verte et mieux connectée.</p>
-          <div class="cta">
-            <a class="btn primary" href="#involved">Devenez bénévole</a>
-            <a class="btn ghost" href="#vote">Comment voter</a>
+          <div class="title">
+            <h2>Plan de développement communautaire</h2>
+            <span class="badge">Nos priorités</span>
+          </div>
+          <div class="grid">
+            <article class="card"><h3>🌳 Participation des aînés</h3><ul class="list"><li>Créer un Club social des aînés pour des activités sociales, de bien-être et de rencontre.</li></ul></article>
+            <article class="card"><h3>💙 Santé et bien-être</h3><ul class="list"><li>Partenariats avec des écoles de médecine pour des cliniques de santé gratuites et accessibles.</li></ul></article>
+            <article class="card"><h3>🏊 Installations récréatives</h3><ul class="list"><li>Développer des parcs aquatiques et élargir l’accès gratuit aux piscines publiques.</li></ul></article>
+            <article class="card"><h3>🚀 Mobilité durable</h3><ul class="list"><li>Installer des bornes de recharge pour trottinettes dans les écoles et milieux de travail.</li></ul></article>
+            <article class="card"><h3>🤝 Soutien à la communauté</h3><ul class="list"><li>Être accessible et à l’écoute, avec un suivi dévoué de vos préoccupations.</li></ul></article>
+            <article class="card"><h3>🌼 Environnement</h3><ul class="list"><li>Embellir parcs et rues avec de la verdure et de l’art public.</li></ul></article>
+            <article class="card"><h3>💼 Croissance économique</h3><ul class="list"><li>Soutenir les petites entreprises, les marchés locaux et l’entrepreneuriat pour créer des emplois.</li></ul></article>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- VISION -->
-    <section id="vision" class="shell">
-      <div class="lang-en">
-        <div class="title"><h2>Community Development Plan</h2><span class="badge">Our Priorities</span></div>
+      <!-- VOTING INFO -->
+      <section id="vote" class="shell">
+        <div class="lang-en">
+          <div class="title"><h2>🗳️ Voting Information</h2><span class="badge">Make your voice heard</span></div>
+          <div class="info">
+            <div class="blk"><h3>Advance Voting</h3><p><strong>Saturday, October 26</strong>: 12:00 PM – 8:00 PM</p></div>
+            <div class="blk"><h3>Returning Officer’s Office</h3><p><strong>Friday, October 24</strong>: 4:00 PM – 8:00 PM</p><p><strong>Sat, Oct 25 – Wed, Oct 29</strong>: Check local schedule at <em>[Insert Municipal Website]</em>.</p></div>
+            <div class="blk"><h3>Mobile Voting</h3><p>Available for electors on the Electors List. File the Mobile Polling Registration Form.</p></div>
+            <div class="blk"><h3>Voting by Mail</h3><p>For non-domiciled electors (owners/co-owners; occupants/co-occupants of businesses). Contact the municipality.</p></div>
+          </div>
+          <p class="foot">Need help? Our team can guide you through any option. Reach out at <strong>info@vote-saint-hubert.ca</strong>.</p>
+        </div>
+        <div class="lang-fr">
+          <div class="title"><h2>🗳️ Informations sur le vote</h2><span class="badge">Faites entendre votre voix</span></div>
+          <div class="info">
+            <div class="blk"><h3>Vote par anticipation</h3><p><strong>Samedi 26 octobre</strong> : 12 h – 20 h</p></div>
+            <div class="blk"><h3>Bureau du président d’élection</h3><p><strong>Vendredi 24 octobre</strong> : 16 h – 20 h</p><p><strong>Sam 25 – Mer 29 oct</strong> : Consultez l’horaire sur <em>[Site municipal]</em>.</p></div>
+            <div class="blk"><h3>Vote itinérant</h3><p>Offert aux électeurs inscrits. Formulaire d’inscription requis.</p></div>
+            <div class="blk"><h3>Vote par correspondance</h3><p>Pour les électeurs non domiciliés (propriétaires/coprop.; occupants/co-occup. d’établissements). Communiquez avec la municipalité.</p></div>
+          </div>
+          <p class="foot">Besoin d’aide? Écrivez-nous : <strong>info@vote-saint-hubert.ca</strong>.</p>
+        </div>
+      </section>
+
+      <!-- GET VOTER INFORMATION -->
+      <section id="getvoterinfo" class="shell">
+        <div class="title">
+          <h2 class="lang-en">🗳️ Get Voter Information</h2>
+          <h2 class="lang-fr">🗳️ Obtenir les infos de vote</h2>
+          <span class="badge">We’ll follow up</span>
+        </div>
+
+        <form id="voterinfo" method="POST"
+              action="https://script.google.com/macros/s/AKfycbzAuD7lDzSMKjwtVctrvlIFFmWtbtN_KsA12w_x3AOuLfTs2dadvyipB3cTxc1USzo1/exec"
+              novalidate>
+          <input type="hidden" name="lang" value="en" id="langHiddenVI" />
+          <input type="hidden" name="_site" id="siteHiddenVI" value="" />
+
+          <div class="row">
+            <div>
+              <label for="vi_name" class="lang-en">Full Name</label>
+              <label for="vi_name" class="lang-fr">Nom complet</label>
+              <input id="vi_name" name="name" placeholder="Jane Doe" required />
+            </div>
+            <div>
+              <label for="vi_email" class="lang-en">Email</label>
+              <label for="vi_email" class="lang-fr">Courriel</label>
+              <input id="vi_email" type="email" name="email" placeholder="you@example.com" required />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="vi_phone" class="lang-en">Phone (optional)</label>
+              <label for="vi_phone" class="lang-fr">Téléphone (facultatif)</label>
+              <input id="vi_phone" name="phone" placeholder="(xxx) xxx-xxxx" />
+            </div>
+            <div>
+              <label for="vi_method" class="lang-en">How would you like to vote?</label>
+              <label for="vi_method" class="lang-fr">Comment voulez-vous voter ?</label>
+              <select id="vi_method" name="vote_choice" required>
+                <option value="Advance Voting" class="lang-en">Advance Voting</option>
+                <option value="Mobile voting"  class="lang-en">Mobile voting</option>
+                <option value="Returning Officer’s Office" class="lang-en">Returning Officer’s Office</option>
+                <option value="Voting by Mail" class="lang-en">Voting by Mail</option>
+                <option value="Advance Voting" class="lang-fr">Vote par anticipation</option>
+                <option value="Mobile voting"  class="lang-fr">Vote itinérant</option>
+                <option value="Returning Officer’s Office" class="lang-fr">Bureau du président d’élection</option>
+                <option value="Voting by Mail" class="lang-fr">Vote par correspondance</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label>
+              <input type="checkbox" name="opt_email" />
+              <span class="lang-en">Email me these instructions.</span>
+              <span class="lang-fr">Envoyez-moi les instructions par courriel.</span>
+            </label>
+            <label>
+              <input type="checkbox" name="opt_sms" />
+              <span class="lang-en">Text me these instructions.</span>
+              <span class="lang-fr">Envoyez-moi les instructions par SMS.</span>
+            </label>
+            <small class="foot">
+              <span class="lang-en">You can unsubscribe anytime. SMS: reply STOP. Email: reply UNSUBSCRIBE.</span>
+              <span class="lang-fr">Désabonnement à tout moment. SMS : répondez STOP. Courriel : répondez UNSUBSCRIBE.</span>
+            </small>
+          </div>
+
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <button class="btn primary" type="submit">
+              <span class="lang-en">Send me voting info</span>
+              <span class="lang-fr">Envoyez-moi les infos</span>
+            </button>
+          </div>
+          <p class="foot" id="viStatus"></p>
+        </form>
+      </section>
+
+      <!-- EVENTS -->
+      <section id="events" class="shell">
+        <div class="title">
+          <h2 class="lang-en">📅 Upcoming Events</h2>
+          <h2 class="lang-fr">📅 Événements à venir</h2>
+          <span class="badge">Community</span>
+        </div>
         <div class="grid">
-          <article class="card"><h3>🌳 Elderly Engagement</h3><ul class="list"><li>Launch a Seniors’ Social Club for social events, wellness activities, and community connection.</li></ul></article>
-          <article class="card"><h3>💙 Health &amp; Wellness</h3><ul class="list"><li>Partner with medical schools for free health camps, offering accessible check-ups for all.</li></ul></article>
-          <article class="card"><h3>🏊 Recreational Facilities</h3><ul class="list"><li>Push for water parks and expanded free public swimming pools.</li></ul></article>
-          <article class="card"><h3>🚀 Sustainable Mobility</h3><ul class="list"><li>Install e-scooter charging stations at schools and workplaces.</li></ul></article>
-          <article class="card"><h3>🤝 Community Support</h3><ul class="list"><li>Stay accessible and approachable, addressing your concerns with dedication and care.</li></ul></article>
-          <article class="card"><h3>🌼 Environmental Development</h3><ul class="list"><li>Beautify parks and streets with greenery and public art.</li></ul></article>
-          <article class="card"><h3>💼 Economic Growth</h3><ul class="list"><li>Boost small businesses, local markets, and entrepreneurship to create jobs.</li></ul></article>
+          <article class="card">
+            <h3>🚪 Door-to-Door — La Savane</h3>
+            <p class="lang-en">Meet neighbors and hear what matters most. <strong>Sat 14:00</strong></p>
+            <p class="lang-fr">Rencontres de quartier et échanges. <strong>Sam 14 h</strong></p>
+          </article>
+          <article class="card">
+            <h3>☕ Coffee Chat — Gaétan-Boucher</h3>
+            <p class="lang-en">Informal Q&amp;A with the candidate. <strong>Sun 10:00</strong></p>
+            <p class="lang-fr">Rencontre informelle avec le candidat. <strong>Dim 10 h</strong></p>
+          </article>
         </div>
-      </div>
-      <div class="lang-fr">
-        <div class="title"><h2>Plan de développement communautaire</h2><span class="badge">Nos priorités</span></div>
+      </section>
+
+      <!-- NEWS -->
+      <section id="news" class="shell">
+        <div class="title">
+          <h2 class="lang-en">📰 Latest News</h2>
+          <h2 class="lang-fr">📰 Nouvelles</h2>
+          <span class="badge">Updates</span>
+        </div>
         <div class="grid">
-          <article class="card"><h3>🌳 Participation des aînés</h3><ul class="list"><li>Créer un Club social des aînés pour des activités sociales, de bien-être et de rencontre.</li></ul></article>
-          <article class="card"><h3>💙 Santé et bien-être</h3><ul class="list"><li>Partenariats avec des écoles de médecine pour des cliniques de santé gratuites et accessibles.</li></ul></article>
-          <article class="card"><h3>🏊 Installations récréatives</h3><ul class="list"><li>Développer des parcs aquatiques et élargir l’accès gratuit aux piscines publiques.</li></ul></article>
-          <article class="card"><h3>🚀 Mobilité durable</h3><ul class="list"><li>Installer des bornes de recharge pour trottinettes dans les écoles et milieux de travail.</li></ul></article>
-          <article class="card"><h3>🤝 Soutien à la communauté</h3><ul class="list"><li>Être accessible et à l’écoute, avec un suivi dévoué de vos préoccupations.</li></ul></article>
-          <article class="card"><h3>🌼 Environnement</h3><ul class="list"><li>Embellir parcs et rues avec de la verdure et de l’art public.</li></ul></article>
-          <article class="card"><h3>💼 Croissance économique</h3><ul class="list"><li>Soutenir les petites entreprises, les marchés locaux et l’entrepreneuriat pour créer des emplois.</li></ul></article>
+          <article class="card">
+            <h3>Park cleanup success</h3>
+            <p class="lang-en">Thanks to 42 volunteers, we collected 120 kg of trash at Parc de la Savane.</p>
+            <p class="lang-fr">Grâce à 42 bénévoles, nous avons ramassé 120 kg de déchets au parc de la Savane.</p>
+          </article>
+          <article class="card">
+            <h3>Candidate town hall</h3>
+            <p class="lang-en">Replay available soon with key takeaways.</p>
+            <p class="lang-fr">La rediffusion sera disponible bientôt avec les points saillants.</p>
+          </article>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- VOTING INFO (static cards) -->
-    <section id="vote" class="shell">
-      <div class="lang-en">
-        <div class="title"><h2>🗳️ Voting Information</h2><span class="badge">Make your voice heard</span></div>
+      <!-- GET INVOLVED -->
+      <section id="involved" class="shell">
+        <div class="title">
+          <h2 class="lang-en">📞 Get Involved</h2>
+          <h2 class="lang-fr">📞 S’impliquer</h2>
+          <span class="badge">Volunteer • Donate • Share</span>
+        </div>
+
+        <form id="volunteer" method="POST"
+              action="https://script.google.com/macros/s/AKfycbzAuD7lDzSMKjwtVctrvlIFFmWtbtN_KsA12w_x3AOuLfTs2dadvyipB3cTxc1USzo1/exec"
+              novalidate>
+          <input type="hidden" name="lang" id="langHidden" value="en" />
+          <input type="hidden" name="_site" id="siteHidden" value="" />
+
+          <div class="row">
+            <div>
+              <label for="name" class="lang-en">Full Name</label>
+              <label for="name" class="lang-fr">Nom complet</label>
+              <input id="name" name="name" placeholder="Jane Doe" required />
+            </div>
+            <div>
+              <label for="email" class="lang-en">Email</label>
+              <label for="email" class="lang-fr">Courriel</label>
+              <input id="email" type="email" name="email" placeholder="you@example.com" required />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="phone" class="lang-en">Phone</label>
+              <label for="phone" class="lang-fr">Téléphone</label>
+              <input id="phone" name="phone" placeholder="(xxx) xxx-xxxx" />
+            </div>
+            <div>
+              <label for="role" class="lang-en">How would you like to help?</label>
+              <label for="role" class="lang-fr">Comment souhaitez-vous aider ?</label>
+              <select id="role" name="role">
+                <option class="lang-en">Door-to-door canvassing</option>
+                <option class="lang-en">Phone banking</option>
+                <option class="lang-en">Events &amp; logistics</option>
+                <option class="lang-en">Social media &amp; outreach</option>
+                <option class="lang-en">Data &amp; tech support</option>
+                <option class="lang-fr">Porte-à-porte</option>
+                <option class="lang-fr">Appels téléphoniques</option>
+                <option class="lang-fr">Événements &amp; logistique</option>
+                <option class="lang-fr">Médias sociaux &amp; rayonnement</option>
+                <option class="lang-fr">Soutien technique &amp; données</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="msg" class="lang-en">Message (optional)</label>
+            <label for="msg" class="lang-fr">Message (optionnel)</label>
+            <textarea id="msg" name="message" rows="4" placeholder="Availability, skills… / Disponibilités, compétences…"></textarea>
+          </div>
+
+          <div>
+            <label>
+              <input type="checkbox" name="opt_email" />
+              <span class="lang-en">I agree to receive election updates by email.</span>
+              <span class="lang-fr">J’accepte de recevoir des mises à jour par courriel.</span>
+            </label>
+            <label>
+              <input type="checkbox" name="opt_sms" />
+              <span class="lang-en">I agree to receive election updates by SMS.</span>
+              <span class="lang-fr">J’accepte de recevoir des mises à jour par SMS.</span>
+            </label>
+            <small class="foot">
+              <span class="lang-en">You can unsubscribe anytime. SMS: reply STOP. Email: reply UNSUBSCRIBE.</span>
+              <span class="lang-fr">Vous pouvez vous désabonner en tout temps. SMS : répondez STOP. Courriel : répondez UNSUBSCRIBE.</span>
+            </small>
+          </div>
+
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <button class="btn primary" type="submit">
+              <span class="lang-en">Sign Up to Volunteer</span>
+              <span class="lang-fr">Devenir bénévole</span>
+            </button>
+            <a class="btn ghost mailchimp" href="#" target="_blank" rel="noopener">
+              <span class="lang-en">Subscribe (Mailchimp)</span>
+              <span class="lang-fr">S’abonner (Mailchimp)</span>
+            </a>
+          </div>
+
+          <p class="foot" id="formStatus"></p>
+        </form>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="shell">
+        <div class="title">
+          <h2 class="lang-en">Contact</h2>
+          <h2 class="lang-fr">Contact</h2>
+          <span class="badge lang-en">We’re here for you</span>
+          <span class="badge lang-fr">À votre écoute</span>
+        </div>
+
         <div class="info">
-          <div class="blk"><h3>Advance Voting</h3><p><strong>Saturday, October 26</strong>: 12:00 PM – 8:00 PM</p></div>
-          <div class="blk"><h3>Returning Officer’s Office</h3><p><strong>Friday, October 24</strong>: 4:00 PM – 8:00 PM</p><p><strong>Sat, Oct 25 – Wed, Oct 29</strong>: Check local schedule at <em>[Insert Municipal Website]</em>.</p></div>
-          <div class="blk"><h3>Mobile Voting</h3><p>Available for electors on the Electors List. File the Mobile Polling Registration Form.</p></div>
-          <div class="blk"><h3>Voting by Mail</h3><p>For non-domiciled electors (owners/co-owners; occupants/co-occupants of businesses). Contact the municipality.</p></div>
-        </div>
-        <p class="foot">Need help? Our team can guide you through any option. Reach out at <strong>[Insert Contact Info]</strong>.</p>
-      </div>
-      <div class="lang-fr">
-        <div class="title"><h2>🗳️ Informations sur le vote</h2><span class="badge">Faites entendre votre voix</span></div>
-        <div class="info">
-          <div class="blk"><h3>Vote par anticipation</h3><p><strong>Samedi 26 octobre</strong> : 12 h – 20 h</p></div>
-          <div class="blk"><h3>Bureau du président d’élection</h3><p><strong>Vendredi 24 octobre</strong> : 16 h – 20 h</p><p><strong>Samedi 25 au mercredi 29 octobre</strong> : Consultez l’horaire sur <em>[Site municipal]</em>.</p></div>
-          <div class="blk"><h3>Vote itinérant</h3><p>Offert aux électeurs inscrits. Remplissez le formulaire d’inscription au vote itinérant.</p></div>
-          <div class="blk"><h3>Vote par correspondance</h3><p>Pour les électeurs non domiciliés (propriétaires/coprop.; occupants/co-occup. d’établissements). Communiquez avec la municipalité.</p></div>
-        </div>
-        <p class="foot">Besoin d’aide? Notre équipe vous accompagne pour toute démarche : <strong>[Coordonnées]</strong>.</p>
-      </div>
-    </section>
-
-    <!-- GET VOTER INFORMATION (new actionable form) -->
-    <section id="getvoterinfo" class="shell">
-      <div class="title">
-        <h2 class="lang-en">🗳️ Get Voter Information</h2>
-        <h2 class="lang-fr">🗳️ Obtenir les infos de vote</h2>
-        <span class="badge">We’ll follow up</span>
-      </div>
-
-      <!--
-HOW TO APPLY THIS PATCH
-1) Open your index.html.
-2) Find the existing voter-info form block by searching for:
-     <form id="voterinfo"
-3) Replace EVERYTHING from that opening <form ...> up to its closing </form>
-   with the block below.
-4) Keep your existing <script> handlers — the field names now match your Apps
-   Script (vote_choice), so the emails/SMS will fire.
-
-Notes
-- The select's name is vote_choice (was vote_method).
-- The option values match your Apps Script keys exactly:
-  "Advance Voting", "Mobile voting", "Returning Officer’s Office", "Voting by Mail".
-- The hidden lang field (langHiddenVI) is present so your script can localize.
--->
-
-<form id="voterinfo" method="POST"
-      action="https://script.google.com/macros/s/AKfycbzAuD7lDzSMKjwtVctrvlIFFmWtbtN_KsA12w_x3AOuLfTs2dadvyipB3cTxc1USzo1/exec"      
-      novalidate>
-  <input type="hidden" name="lang" value="en" id="langHiddenVI" />
-
-  <div class="row">
-    <div>
-      <label for="vi_name" class="lang-en">Full Name</label>
-      <label for="vi_name" class="lang-fr">Nom complet</label>
-      <input id="vi_name" name="name" placeholder="Jane Doe" required />
-    </div>
-    <div>
-      <label for="vi_email" class="lang-en">Email</label>
-      <label for="vi_email" class="lang-fr">Courriel</label>
-      <input id="vi_email" type="email" name="email" placeholder="you@example.com" required />
-    </div>
-  </div>
-
-  <div class="row">
-    <div>
-      <label for="vi_phone" class="lang-en">Phone (optional)</label>
-      <label for="vi_phone" class="lang-fr">Téléphone (facultatif)</label>
-      <input id="vi_phone" name="phone" placeholder="(xxx) xxx-xxxx" />
-    </div>
-    <div>
-      <label for="vi_method" class="lang-en">How would you like to vote?</label>
-      <label for="vi_method" class="lang-fr">Comment voulez-vous voter ?</label>
-      <!-- 🔑 name MUST be vote_choice to match Apps Script -->
-      <select id="vi_method" name="vote_choice" required>
-        <!-- EN options (values are the canonical keys your script uses) -->
-        <option value="Advance Voting" class="lang-en">Advance Voting</option>
-        <option value="Mobile voting"  class="lang-en">Mobile voting</option>
-        <option value="Returning Officer’s Office" class="lang-en">Returning Officer’s Office</option>
-        <option value="Voting by Mail" class="lang-en">Voting by Mail</option>
-        <!-- FR labels mapped to the same values -->
-        <option value="Advance Voting" class="lang-fr">Vote par anticipation</option>
-        <option value="Mobile voting"  class="lang-fr">Vote itinérant</option>
-        <option value="Returning Officer’s Office" class="lang-fr">Bureau du président d’élection</option>
-        <option value="Voting by Mail" class="lang-fr">Vote par correspondance</option>
-      </select>
-    </div>
-  </div>
-
-  <div>
-    <label><input type="checkbox" name="opt_email" />
-      <span class="lang-en">Email me these instructions.</span>
-      <span class="lang-fr">Envoyez-moi les instructions par courriel.</span>
-    </label>
-    <label><input type="checkbox" name="opt_sms" />
-      <span class="lang-en">Text me these instructions.</span>
-      <span class="lang-fr">Envoyez-moi les instructions par SMS.</span>
-    </label>
-    <small class="foot">
-      <span class="lang-en">You can unsubscribe anytime. SMS: reply STOP. Email: reply UNSUBSCRIBE.</span>
-      <span class="lang-fr">Vous pouvez vous désabonner en tout temps. SMS : répondez STOP. Courriel : répondez UNSUBSCRIBE.</span>
-    </small>
-  </div>
-
-  <div style="display:flex;gap:12px;flex-wrap:wrap">
-    <button class="btn primary" type="submit">
-      <span class="lang-en">Send me voting info</span>
-      <span class="lang-fr">Envoyez-moi les infos</span>
-    </button>
-  </div>
-  <p class="foot" id="viStatus"></p>
-</form>
-
-<!-- Optional helper: keep hidden lang in sync with site language. If you already
-     have this logic in your <script>, you can skip. -->
-<script>
-  (function(){
-    var root = document.documentElement;
-    var viLang = document.getElementById('langHiddenVI');
-    function syncLang(){ if(viLang) viLang.value = root.getAttribute('data-lang')||'en'; }
-    syncLang();
-    // If your page has language toggle calling setLang(), ensure it calls syncLang() too
-    // or duplicate this listener with your own event.
-    document.addEventListener('language-changed', syncLang);
-  })();
-</script>
-
-
-    </section>
-
-    <!-- EVENTS -->
-    <section id="events" class="shell">
-      <div class="title"><h2 class="lang-en">📅 Upcoming Events</h2><h2 class="lang-fr">📅 Événements à venir</h2><span class="badge">Community</span></div>
-      <div class="grid">
-        <article class="card"><h3>🚪 Door-to-Door — La Savane</h3><p class="lang-en">Meet neighbors and hear what matters most. <strong>Sat 14:00</strong></p><p class="lang-fr">Rencontres de quartier et échanges. <strong>Sam 14 h</strong></p></article>
-        <article class="card"><h3>☕ Coffee Chat — Gaétan-Boucher</h3><p class="lang-en">Informal Q&A with the candidate. <strong>Sun 10:00</strong></p><p class="lang-fr">Rencontre informelle avec le candidat. <strong>Dim 10 h</strong></p></article>
-      </div>
-    </section>
-
-    <!-- NEWS -->
-    <section id="news" class="shell">
-      <div class="title"><h2 class="lang-en">📰 Latest News</h2><h2 class="lang-fr">📰 Nouvelles</h2><span class="badge">Updates</span></div>
-      <div class="grid">
-        <article class="card"><h3>Park cleanup success</h3><p class="lang-en">Thanks to 42 volunteers, we collected 120 kg of trash at Parc de la Savane.</p><p class="lang-fr">Grâce à 42 bénévoles, nous avons ramassé 120 kg de déchets au parc de la Savane.</p></article>
-        <article class="card"><h3>Candidate town hall</h3><p class="lang-en">Replay available soon with key takeaways.</p><p class="lang-fr">La rediffusion sera disponible bientôt avec les points saillants.</p></article>
-      </div>
-    </section>
-
-    <!-- GET INVOLVED -->
-    <section id="involved" class="shell">
-      <div class="title"><h2 class="lang-en">📞 Get Involved</h2><h2 class="lang-fr">📞 S’impliquer</h2><span class="badge">Volunteer • Donate • Share</span></div>
-
-      <form id="volunteer" method="POST"
-            action="https://script.google.com/macros/s/AKfycbzAuD7lDzSMKjwtVctrvlIFFmWtbtN_KsA12w_x3AOuLfTs2dadvyipB3cTxc1USzo1/exec"
-            novalidate>
-        <input type="hidden" name="lang" id="langHidden" value="en" />
-        <div class="row">
-          <div>
-            <label for="name" class="lang-en">Full Name</label>
-            <label for="name" class="lang-fr">Nom complet</label>
-            <input id="name" name="name" placeholder="Jane Doe" required />
+          <div class="blk">
+            <h3 class="lang-en">General Inquiries</h3>
+            <h3 class="lang-fr">Renseignements généraux</h3>
+            <p>
+              Email: <a href="mailto:info@vote-saint-hubert.ca">info@vote-saint-hubert.ca</a><br />
+              Phone: <a href="tel:+14382261806">+1 (438) 226-1806</a>
+            </p>
           </div>
-          <div>
-            <label for="email" class="lang-en">Email</label>
-            <label for="email" class="lang-fr">Courriel</label>
-            <input id="email" type="email" name="email" placeholder="you@example.com" required />
+
+          <div class="blk">
+            <h3 class="lang-en">Media &amp; Press</h3>
+            <h3 class="lang-fr">Médias &amp; presse</h3>
+            <p>
+              Email: <a href="mailto:press@vote-saint-hubert.ca">press@vote-saint-hubert.ca</a>
+            </p>
           </div>
         </div>
-        <div class="row">
-          <div>
-            <label for="phone" class="lang-en">Phone</label>
-            <label for="phone" class="lang-fr">Téléphone</label>
-            <input id="phone" name="phone" placeholder="(xxx) xxx-xxxx" />
-          </div>
-          <div>
-            <label for="role" class="lang-en">How would you like to help?</label>
-            <label for="role" class="lang-fr">Comment souhaitez-vous aider?</label>
-            <select id="role" name="role">
-              <option class="lang-en">Door-to-door canvassing</option>
-              <option class="lang-en">Phone banking</option>
-              <option class="lang-en">Events & logistics</option>
-              <option class="lang-en">Social media & outreach</option>
-              <option class="lang-en">Data & tech support</option>
-              <option class="lang-fr">Porte-à-porte</option>
-              <option class="lang-fr">Appels téléphoniques</option>
-              <option class="lang-fr">Événements & logistique</option>
-              <option class="lang-fr">Médias sociaux & rayonnement</option>
-              <option class="lang-fr">Soutien technique & données</option>
-            </select>
-          </div>
-        </div>
-        <div>
-          <label for="msg" class="lang-en">Message (optional)</label>
-          <label for="msg" class="lang-fr">Message (optionnel)</label>
-          <textarea id="msg" name="message" rows="4" placeholder="Availability, skills… / Disponibilités, compétences…"></textarea>
-        </div>
-        <div>
-          <label><input type="checkbox" name="opt_email" /> <span class="lang-en">I agree to receive election updates by email.</span><span class="lang-fr">J’accepte de recevoir des mises à jour par courriel.</span></label>
-          <label><input type="checkbox" name="opt_sms" /> <span class="lang-en">I agree to receive election updates by SMS.</span><span class="lang-fr">J’accepte de recevoir des mises à jour par SMS.</span></label>
-          <small class="foot"><span class="lang-en">You can unsubscribe anytime. SMS: reply STOP. Email: reply UNSUBSCRIBE.</span><span class="lang-fr">Vous pouvez vous désabonner en tout temps. SMS : répondez STOP. Courriel : répondez UNSUBSCRIBE.</span></small>
-        </div>
-        <div style="display:flex;gap:12px;flex-wrap:wrap">
-          <button class="btn primary" type="submit"><span class="lang-en">Sign Up to Volunteer</span><span class="lang-fr">Devenir bénévole</span></button>
-          <a class="btn ghost" href="#" target="_blank" rel="noopener"><span class="lang-en">Subscribe (Mailchimp)</span><span class="lang-fr">S’abonner (Mailchimp)</span></a>
-        </div>
-        <p class="foot" id="formStatus"></p>
-      </form>
-    </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="shell">
-      <div class="title"><h2 class="lang-en">Contact</h2><h2 class="lang-fr">Contact</h2><span class="badge">We’re here for you • À votre écoute</span></div>
-      <div class="info">
-        <div class="blk">
-          <h3 class="lang-en">General Inquiries</h3><h3 class="lang-fr">Renseignements généraux</h3>
-          <p>Email: <a href="mailto:info@example.com">info@example.com</a><br/>Phone: <a href="tel:+10000000000">+1 (000) 000-0000</a></p>
-        </div>
-        <div class="blk">
-          <h3 class="lang-en">Media & Press</h3><h3 class="lang-fr">Médias & presse</h3>
-          <p>Email: <a href="mailto:press@example.com">press@example.com</a></p>
-        </div>
-      </div>
-      <p class="foot"><span class="lang-en">Authorized by</span><span class="lang-fr">Autorisé par</span> <strong>[Agent’s Name]</strong>. <span class="lang-en">Paid for by</span><span class="lang-fr">Payé par</span> <strong>[Campaign Name]</strong>. © <span id="y"></span></p>
-    </section>
-  </main>
+        <p class="foot">
+          <span class="lang-en">Authorized by</span>
+          <span class="lang-fr">Autorisé par</span>
+          <strong>Urmica Alaina</strong>.
+          <span class="lang-en">Paid for by</span>
+          <span class="lang-fr">Payé par</span>
+          <strong>Akilla Prasanthi</strong>.
+          © <span id="y"></span>
+        </p>
+      </section>
+    </main>
 
-  <footer class="footer shell">
-    <div>© <span id="y2"></span> Vieux-Saint-Hubert–La Savane Campaign • <a href="#">Privacy</a></div>
-  </footer>
+    <footer class="footer shell">
+      <div>© <span id="y2"></span> Vieux-Saint-Hubert–La Savane Campaign • <a href="#">Privacy</a></div>
+    </footer>
 
-  <script>
-    // year stamps
-    const y = new Date().getFullYear();
-    document.getElementById('y').textContent = y;
-    document.getElementById('y2').textContent = y;
+    <script>
+      // year stamps
+      const yr = new Date().getFullYear();
+      document.getElementById('y').textContent = yr;
+      document.getElementById('y2').textContent = yr;
 
-    // anchor smooth scroll fallback
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click',e=>{
-        const id=a.getAttribute('href'); const el=document.querySelector(id);
-        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); }
-      });
-    });
-
-    // language dropdown
-    const root = document.documentElement;
-    const langHidden = document.getElementById('langHidden');
-    const langDD = document.getElementById('lang-dd');
-    function setLang(lang){
-      root.setAttribute('data-lang', lang);
-      document.documentElement.lang = lang;
-      if (langHidden) langHidden.value = lang;
-      // voter info form hidden lang
-      const viHidden = document.getElementById('langHiddenVI');
-      if (viHidden) viHidden.value = lang;
-      if (langDD && langDD.value !== lang) langDD.value = lang;
-    }
-    if (langDD){
-      langDD.addEventListener('change', ()=> setLang(langDD.value));
-      const initial = document.documentElement.getAttribute('data-lang') || 'en';
-      langDD.value = initial; setLang(initial);
-    }
-
-    // normalize phone to E.164 (+1XXXXXXXXXX for 10-digit CA/US)
-    function toE164(raw){
-      let s = String(raw||'').replace(/[^\d+]/g,'');
-      if (s.startsWith('+')) return s;
-      if (s.length === 10) return '+1' + s;
-      return s;
-    }
-
-    // ---- Volunteer form submit ----
-    const form = document.getElementById('volunteer');
-    const statusEl = document.getElementById('formStatus');
-    const submitBtn = form.querySelector('button[type="submit"]');
-    form.addEventListener('submit', async (e)=>{
-      e.preventDefault();
-      submitBtn.disabled = true; submitBtn.style.opacity = .7;
-      statusEl.textContent = (root.getAttribute('data-lang')==='fr') ? 'Envoi en cours…' : 'Submitting…';
-      try {
-        const fd = new FormData(form);
-        fd.set('phone', toE164(fd.get('phone')));
-        const body = new URLSearchParams(fd).toString();
-        await fetch(form.action, {
-          method:'POST', mode:'no-cors',
-          headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},
-          body
+      // smooth-scroll fallback
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+          const id = a.getAttribute('href'); const el = document.querySelector(id);
+          if (el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); }
         });
-        statusEl.textContent = (root.getAttribute('data-lang')==='fr')
-          ? 'Merci! Courriel/SMS envoyés si vous avez consenti.'
-          : 'Thanks! Email/SMS sent if you opted in.';
-        form.reset();
-      } catch (err){
-        statusEl.textContent = (root.getAttribute('data-lang')==='fr')
-          ? 'Échec de l’envoi. Réessayez ou écrivez-nous.'
-          : 'Submission failed. Please try again or email us.';
-      } finally{
-        submitBtn.disabled = false; submitBtn.style.opacity = 1;
-      }
-    });
+      });
 
-    // ---- Get Voter Information form ----
-    (function wireVoterInfo(){
-      const vForm = document.getElementById('voterinfo');
-      if (!vForm) return;
-      const status = document.getElementById('viStatus');
-      const btn = vForm.querySelector('button[type="submit"]');
+      // language dropdown
+      const root = document.documentElement;
+      const langHidden = document.getElementById('langHidden');
+      const langDD = document.getElementById('lang-dd');
+
+      function setLang(lang){
+        root.setAttribute('data-lang', lang);
+        document.documentElement.lang = lang;
+        const viHidden = document.getElementById('langHiddenVI');
+        if (langHidden) langHidden.value = lang;
+        if (viHidden) viHidden.value = lang;
+        if (langDD && langDD.value !== lang) langDD.value = lang;
+        document.dispatchEvent(new CustomEvent('language-changed'));
+      }
+      if (langDD){
+        langDD.addEventListener('change', () => setLang(langDD.value));
+        const initial = document.documentElement.getAttribute('data-lang') || 'en';
+        langDD.value = initial; setLang(initial);
+      }
+
+      // E.164 phone normalization
+      function toE164(raw){
+        let s = String(raw||'').replace(/[^\d+]/g,'');
+        if (s.startsWith('+')) return s;
+        if (s.length === 10) return '+1' + s;
+        return s;
+      }
+
+      // hidden _site for backend allow-list
+      const siteValue = location.hostname;
+      ['siteHidden','siteHiddenVI'].forEach(id=>{
+        const el = document.getElementById(id);
+        if (el) el.value = siteValue;
+      });
+
+      // Volunteer form submit
+      const vForm = document.getElementById('volunteer');
+      const vStatus = document.getElementById('formStatus');
+      const vBtn = vForm.querySelector('button[type="submit"]');
       vForm.addEventListener('submit', async (e)=>{
         e.preventDefault();
-        const isFr = (root.getAttribute('data-lang')==='fr');
-        status.textContent = isFr ? 'Envoi en cours…' : 'Submitting…';
-        btn.disabled = true; btn.style.opacity = .7;
+        vBtn.disabled = true; vBtn.style.opacity = .7;
+        vStatus.textContent = (root.getAttribute('data-lang')==='fr') ? 'Envoi en cours…' : 'Submitting…';
         try{
           const fd = new FormData(vForm);
-          if (fd.get('phone')) fd.set('phone', toE164(fd.get('phone')));
+          fd.set('phone', toE164(fd.get('phone')));
           const body = new URLSearchParams(fd).toString();
-          await fetch(vForm.action, {
-            method:'POST', mode:'no-cors',
+          const resp = await fetch(vForm.action, {
+            method:'POST', mode:'cors',
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},
             body
           });
-          status.textContent = isFr
-            ? "Merci ! Nous vous avons envoyé les instructions (si vous avez coché Courriel/SMS)."
-            : "Thanks! We've sent the instructions (if you opted Email/SMS).";
-          vForm.reset();
-        } catch(err){
-          status.textContent = isFr
-            ? "Échec de l’envoi. Réessayez ou écrivez-nous."
-            : "Submission failed. Please try again or email us.";
-        } finally{
-          btn.disabled = false; btn.style.opacity = 1;
+          let ok = resp.ok; try { const j = await resp.json(); ok = ok && j.ok; } catch(_){ }
+          vStatus.textContent = ok
+            ? ((root.getAttribute('data-lang')==='fr')
+                ? 'Merci! Courriel/SMS envoyés si vous avez consenti.'
+                : 'Thanks! Email/SMS sent if you opted in.')
+            : ((root.getAttribute('data-lang')==='fr')
+                ? 'Échec de l’envoi. Réessayez ou écrivez-nous.'
+                : 'Submission failed. Please try again or email us.');
+          if (ok) vForm.reset();
+        } catch {
+          vStatus.textContent = (root.getAttribute('data-lang')==='fr')
+            ? 'Échec de l’envoi. Réessayez ou écrivez-nous.'
+            : 'Submission failed. Please try again or email us.';
+        } finally {
+          vBtn.disabled = false; vBtn.style.opacity = 1;
         }
       });
-    })();
-  </script>
-</body>
+
+      // Get voter info submit
+      (function wireGetVoterInfo(){
+        const f = document.getElementById('voterinfo');
+        if (!f) return;
+        const status = document.getElementById('viStatus');
+        const btn = f.querySelector('button[type="submit"]');
+        f.addEventListener('submit', async (e)=>{
+          e.preventDefault();
+          const isFr = (root.getAttribute('data-lang')==='fr');
+          status.textContent = isFr ? 'Envoi en cours…' : 'Submitting…';
+          btn.disabled = true; btn.style.opacity = .7;
+          try{
+            const fd = new FormData(f);
+            if (fd.get('phone')) fd.set('phone', toE164(fd.get('phone')));
+            const body = new URLSearchParams(fd).toString();
+            const resp = await fetch(f.action, {
+              method:'POST', mode:'cors',
+              headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},
+              body
+            });
+            let ok = resp.ok; try { const j = await resp.json(); ok = ok && j.ok; } catch(_){ }
+            status.textContent = ok
+              ? (isFr
+                  ? "Merci ! Nous vous avons envoyé les instructions (si vous avez coché Courriel/SMS)."
+                  : "Thanks! We've sent the instructions (if you opted Email/SMS).")
+              : (isFr
+                  ? "Échec de l’envoi. Réessayez ou écrivez-nous."
+                  : "Submission failed. Please try again or email us.");
+            if (ok) f.reset();
+          } catch {
+            status.textContent = isFr
+              ? "Échec de l’envoi. Réessayez ou écrivez-nous."
+              : "Submission failed. Please try again or email us.";
+          } finally {
+            btn.disabled = false; btn.style.opacity = 1;
+          }
+        });
+      })();
+    </script>
+  </body>
 </html>
