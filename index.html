@@ -24,10 +24,10 @@
 
       body{
         margin:0;
-        background:linear-gradient(180deg,#0ea5e9 0%, #3b82f6 45%, #7c3aed 100%); /* aurora blue → indigo → purple */
+        background:linear-gradient(180deg,#0ea5e9 0%, #3b82f6 45%, #7c3aed 100%);
         color:var(--text);
         font:18px/1.7 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
-        padding-top:80px; /* space for fixed header */
+        padding-top:80px;
       }
 
       a{color:var(--brand)} a:hover{opacity:.9}
@@ -50,37 +50,32 @@
         conic-gradient(from 200deg, #60a5fa, #8b5cf6, #60a5fa);
         box-shadow:0 0 0 1px rgba(255,255,255,.08),0 10px 30px rgba(104,129,255,.25)}
 
-      /* ===== Language pill (patched for readability) ===== */
+      /* ===== Language pill ===== */
       .lang-dd{position:relative;display:inline-block; z-index:1002}
       .lang-dd select{
         -webkit-appearance:none;-moz-appearance:none;appearance:none;
-        background:#121726;            /* darker pill so text pops */
-        border:2px solid var(--ring);  /* strong focus ring color */
+        background:#121726;
+        border:2px solid var(--ring);
         border-radius:999px;color:#fff;
         padding:10px 36px 10px 14px;font-weight:800;cursor:pointer; line-height:1;
       }
       .lang-dd select:focus{outline:none;box-shadow:0 0 0 3px rgba(59,130,246,.35)}
       .lang-dd::after{content:"▾";position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;opacity:.9;color:#fff}
-      /* Make the dropdown list itself dark/high‑contrast */
       .lang-dd select option{ background:#0b0f19 !important; color:#ffffff !important; }
       .lang-dd select option:hover,
       .lang-dd select option:checked{ background:#2563eb !important; color:#fff !important; }
-      /* If someone accidentally marks FR disabled somewhere, keep it readable
-         (we still recommend not using disabled on the FR option) */
       .lang-dd select option[disabled]{ opacity:1 !important; color:#cbd5e1 !important; }
 
       /* ===== Sections / cards ===== */
       .hero{
         position:relative;
-        padding:120px 0 64px;         /* more room so text never hides under photo */
+        padding:120px 0 64px;
         overflow:hidden;
         background:
           radial-gradient(1200px 600px at 10% -10%, rgba(104,129,255,.2), transparent 40%),
           radial-gradient(1200px 600px at 90% -10%, rgba(167,139,250,.18), transparent 45%);
       }
-      /* make space on the right for the portrait so text never overlaps */
       .hero .shell{padding-right:clamp(0px, 34vw, 420px)}
-
       .hero h1{font-size:clamp(28px,5vw,48px);line-height:1.1;margin:0 0 14px}
       .hero p{font-size:clamp(18px,2.4vw,28px);color:rgba(234,242,255,.95);margin:0 0 26px;text-shadow:0 1px 2px rgba(0,0,0,.25);} 
       .cta{display:flex;gap:12px;flex-wrap:wrap}
@@ -123,10 +118,11 @@
       .candidate-hero img{width:100%;height:auto;display:block;object-fit:cover}
       @media(max-width:1200px){ .candidate-hero{ right:2%; width:min(36vw, 360px); top:46%; } }
       @media(max-width:980px){  .candidate-hero{ right:2%; width:min(40vw, 320px); top:44%; } }
-      @media(max-width:760px){  .candidate-hero{ display:none } /* hide on phones */ }
+      @media(max-width:760px){  .candidate-hero{ display:none } }
 
       /* Optional: hide Mailchimp button until you have a real link */
       .btn.mailchimp{ display:none }
+
       /* === Typography scale overrides (bigger cards/blocks) === */
       .card h3, .blk h3{font-size:24px;}
       .card, .blk{font-size:18px; line-height:1.75;}
@@ -135,7 +131,21 @@
       .title h2{font-size:28px;}
       .badge{font-size:13px;}
       .btn{padding:14px 20px;}
-</style>
+
+      /* === Help banner under hero CTAs === */
+      .support { margin-top:14px; }
+      .support-banner{
+        display:inline-flex; align-items:center; gap:10px;
+        padding:12px 16px; border-radius:14px;
+        background:rgba(255,255,255,.12);
+        border:1px solid rgba(255,255,255,.25);
+        color:#fff; font-weight:700;
+        backdrop-filter:saturate(120%) blur(2px);
+        box-shadow:0 8px 24px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.25);
+      }
+      .support-banner a{ color:#fff; text-decoration:none; border-bottom:1px dotted rgba(255,255,255,.85); }
+      .support-banner a:hover{ opacity:.9; }
+    </style>
   </head>
 
   <body>
@@ -175,6 +185,11 @@
               <a class="btn primary" href="#involved">Volunteer Today</a>
               <a class="btn ghost" href="#vote">How to Vote</a>
             </div>
+            <div class="support">
+              <div class="support-banner">📞 If you need help on the day of voting, don't hesitate to get in touch with
+                <a href="tel:+15142448194">514-244-8194</a>.
+              </div>
+            </div>
           </div>
           <div class="lang-fr">
             <h1>Votez pour le progrès!<br />Votez pour Vieux-Saint-Hubert–La Savane!</h1>
@@ -182,6 +197,11 @@
             <div class="cta">
               <a class="btn primary" href="#involved">Devenez bénévole</a>
               <a class="btn ghost" href="#vote">Comment voter</a>
+            </div>
+            <div class="support">
+              <div class="support-banner">📞 Si vous avez besoin d’aide le jour du vote, n’hésitez pas à nous joindre au
+                <a href="tel:+15142448194">514-244-8194</a>.
+              </div>
             </div>
           </div>
         </div>
@@ -256,7 +276,7 @@
             </div>
             <div class="blk">
               <h3>Contact</h3>
-              <p>Election office: <a href="tel:14504637125">450‑463‑7125</a><br>
+              <p>Election office: <a href="tel:14504637125">450-463-7125</a><br>
                  Email: <a href="mailto:info.election@longueuil.quebec">info.election@longueuil.quebec</a></p>
             </div>
           </div>
@@ -269,20 +289,20 @@
               <h3>Vote par anticipation</h3>
               <p><strong>Quand&nbsp;:</strong> <strong>Dimanche 26 octobre</strong>, <strong>12&nbsp;h – 20&nbsp;h</strong><br>
                  <strong>Où&nbsp;:</strong> <strong>Hôtel de ville de Longueuil</strong>, 4250 ch. de la Savane, Longueuil (QC) J3Y 9G4<br>
-                 <strong>Entrée&nbsp;:</strong> Entrée principale • <strong>Sections de vote&nbsp;:</strong> <strong>14‑41</strong></p>
+                 <strong>Entrée&nbsp;:</strong> Entrée principale • <strong>Sections de vote&nbsp;:</strong> <strong>14-41</strong></p>
             </div>
             <div class="blk">
               <h3>Bureau du président d’élection</h3>
               <p><strong>Quand&nbsp;:</strong> <strong>Vendredi 24 octobre</strong>, <strong>16&nbsp;h – 20&nbsp;h</strong><br>
                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Mercredi 29 octobre</strong>, <strong>10&nbsp;h – 20&nbsp;h</strong><br>
                  <strong>Où&nbsp;:</strong> <strong>Centre Labrosse</strong>, 3880 rue Labrosse, Longueuil (QC) J3Y 3C6<br>
-                 <strong>Entrée&nbsp;:</strong> Entrée principale • <strong>Section de vote&nbsp;:</strong> <strong>14‑98</strong></p>
+                 <strong>Entrée&nbsp;:</strong> Entrée principale • <strong>Section de vote&nbsp;:</strong> <strong>14-98</strong></p>
             </div>
             <div class="blk">
               <h3>Jour du scrutin</h3>
               <p><strong>Quand&nbsp;:</strong> <strong>Dimanche 2 novembre</strong>, <strong>10&nbsp;h – 20&nbsp;h</strong><br>
                  <strong>Où&nbsp;:</strong> <strong>Hôtel de ville de Longueuil</strong>, 4250 ch. de la Savane, Longueuil, QC J3Y 9G4<br>
-                 <strong>Entrée&nbsp;:</strong> Entrée principale • <strong>District de vote&nbsp;:</strong> <strong>14‑15</strong></p>
+                 <strong>Entrée&nbsp;:</strong> Entrée principale • <strong>District de vote&nbsp;:</strong> <strong>14-15</strong></p>
             </div>
             <div class="blk">
               <h3>Vérifiez votre inscription</h3>
@@ -291,11 +311,11 @@
             </div>
             <div class="blk">
               <h3>Contact</h3>
-              <p>Bureau des élections&nbsp;: <a href="tel:14504637125">450‑463‑7125</a><br>
+              <p>Bureau des élections&nbsp;: <a href="tel:14504637125">450-463-7125</a><br>
                  Courriel&nbsp;: <a href="mailto:info.election@longueuil.quebec">info.election@longueuil.quebec</a></p>
             </div>
           </div>
-          <p class="foot">Besoin d’aide&nbsp;? Écrivez‑nous : <strong>info@vote-saint-hubert.ca</strong>.</p>
+          <p class="foot">Besoin d’aide&nbsp;? Écrivez-nous : <strong>info@vote-saint-hubert.ca</strong>.</p>
         </div>
       </section>
 
@@ -519,7 +539,7 @@
             <h3 class="lang-fr">Renseignements généraux</h3>
             <p>
               Email: <a href="mailto:info@vote-saint-hubert.ca">info@vote-saint-hubert.ca</a><br />
-              Phone: <a href="tel:+14382261806">+1 (438) 226-1806</a>
+              Phone: <a href="tel:+15142448194">+1 (514) 244-8194</a>
             </p>
           </div>
 
@@ -579,7 +599,6 @@
               if (show) hasActive = true;
             }
           });
-          // If current selection is hidden/disabled, pick the first visible option
           if (sel.selectedOptions.length && sel.selectedOptions[0].disabled){
             const firstVisible = opts.find(o => !o.disabled);
             if (firstVisible) sel.value = firstVisible.value;
